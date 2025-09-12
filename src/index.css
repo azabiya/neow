@@ -1,0 +1,38 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* Importar las fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Days+One&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* Configuración base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Clases de utilidad personalizadas para fuentes */
+@layer utilities {
+  .font-bebas {
+    font-family: 'Bebas Neue';
+  }
+  
+  .font-days {
+    font-family: 'Days One', sans-serif;
+  }
+  
+  .font-inter {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
