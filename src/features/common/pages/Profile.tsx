@@ -1,4 +1,4 @@
-// src/pages/Profile.tsx
+// src/features/common/pages/Profile.tsx
 import { useNavigate } from 'react-router-dom';
 import { Bell, User, CreditCard, HelpCircle, LogOut, Star, CheckCircle2, Pencil } from 'lucide-react';
 

@@ -1,8 +1,8 @@
-// src/pages/TaskDetail.tsx
+// src/features/student/pages/StudentTaskDetail.tsx
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, FileText, Star, CheckCircle2 } from 'lucide-react';
 
-const TaskDetail = () => {
+const StudentTaskDetail = () => {
   const navigate = useNavigate();
 
   const timelineSteps = [
@@ -187,4 +187,4 @@ const TaskDetail = () => {
   );
 };
 
-export default TaskDetail;
+export default StudentTaskDetail;

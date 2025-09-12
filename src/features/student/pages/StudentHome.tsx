@@ -1,9 +1,9 @@
-// src/pages/Home.tsx
+// src/features/student/pages/StudentHome.tsx
 import React from 'react';
 import { Bell, FileText, BarChart3, Timer, User, Home as HomeIcon, ListTodo } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const StudentHome = () => {
   const taskItems = [
     {
       id: 1,
@@ -105,22 +105,9 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200">
-        <div className="flex justify-around py-4">
-          <Link to="/" className="flex flex-col items-center">
-            <HomeIcon className="w-6 h-6 text-cyan-400" />
-          </Link>
-          <Link to="/tasks" className="flex flex-col items-center">
-            <ListTodo className="w-6 h-6 text-gray-400" />
-          </Link>
-          <Link to="/profile" className="flex flex-col items-center">
-            <User className="w-6 h-6 text-gray-400" />
-          </Link>
-        </div>
-      </div>
+      {/* Bottom Navigation is now handled by MainLayout */}
     </div>
   );
 };
 
-export default Home;
+export default StudentHome;

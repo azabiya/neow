@@ -1,4 +1,4 @@
-// src/components/BottomNavigation.tsx
+// src/components/shared/BottomNavigation.tsx
 import { Home, NotebookText, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 

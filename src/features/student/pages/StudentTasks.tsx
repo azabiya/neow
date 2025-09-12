@@ -1,9 +1,9 @@
-// src/pages/Tasks.tsx
+// src/features/student/pages/StudentTasks.tsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Clock, Home, FileText, User } from 'lucide-react';
 
-const Tasks = () => {
+const StudentTasks = () => {
   const [activeTab, setActiveTab] = useState('Pendientes');
   const navigate = useNavigate();
 
@@ -76,28 +76,9 @@ const Tasks = () => {
         </div>
       </main>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200 px-4 py-2">
-        <div className="flex justify-around items-center">
-          <button 
-            onClick={() => navigate('/')} 
-            className="flex flex-col items-center p-2 text-gray-500"
-          >
-            <Home size={24} />
-          </button>
-          <button className="flex flex-col items-center p-2 text-[#00B8DB]">
-            <FileText size={24} />
-          </button>
-          <button 
-            onClick={() => navigate('/profile')} 
-            className="flex flex-col items-center p-2 text-gray-500"
-          >
-            <User size={24} />
-          </button>
-        </div>
-      </div>
+      {/* Bottom Navigation is now handled by MainLayout */}
     </div>
   );
 };
 
-export default Tasks;
+export default StudentTasks;
