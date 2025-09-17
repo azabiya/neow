@@ -9,7 +9,7 @@ const BottomNavigation = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white" style={{borderTop: '1px solid #C5B9B9'}}>
       <nav className="flex justify-around items-center h-20">
-        <NavLink to="/" className={getLinkClass}>
+        <NavLink to="/inicio" className={getLinkClass}>
           <Home size={32} />
         </NavLink>
         <NavLink to="/tasks" className={getLinkClass}>

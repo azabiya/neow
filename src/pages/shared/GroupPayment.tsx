@@ -1,16 +1,51 @@
+// src/pages/shared/GroupPayment.tsx
+import { useState, useEffect } from 'react';
 import { User, Link as LinkIcon } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { supabase } from '../../supabaseClient';
 
 const GroupPayment = () => {
     const navigate = useNavigate();
+    const { groupId } = useParams();
+    const [members, setMembers] = useState([]);
+    const [task, setTask] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const members = [
-        { name: 'Ana García', date: '8 Sep. 9:00 AM', status: 'enviado' },
-        { name: 'Ana Garcez', date: '8 Sep. 9:00 AM', status: 'pendiente', selected: true },
-        { name: 'Ana García', date: '8 Sep. 9:00 AM', status: 'verificado' },
-        { name: 'Ana García', date: '8 Sep. 9:00 AM', status: 'invalido' },
-        { name: 'Ana García', date: '8 Sep. 9:00 AM', status: 'enviado' },
-    ];
+    useEffect(() => {
+        const fetchGroupData = async () => {
+            if (!groupId) return;
+
+            // Fetch group and task details
+            const { data: groupData, error: groupError } = await supabase
+                .from('payment_groups')
+                .select(`*, task:tasks(*)`)
+                .eq('id', groupId)
+                .single();
+
+            if (groupError) {
+                console.error("Error fetching group data:", groupError);
+                setLoading(false);
+                return;
+            }
+            setTask(groupData.task);
+
+            // Fetch members
+            const { data: membersData, error: membersError } = await supabase
+                .from('group_members')
+                .select('*')
+                .eq('group_id', groupId);
+
+            if (membersError) {
+                console.error("Error fetching members:", membersError);
+            } else {
+                setMembers(membersData);
+            }
+            
+            setLoading(false);
+        };
+
+        fetchGroupData();
+    }, [groupId]);
 
     const getStatusChip = (status: string) => {
         switch (status) {
@@ -27,6 +62,8 @@ const GroupPayment = () => {
         }
     };
 
+    if (loading) return <div className="p-10">Cargando...</div>
+
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
@@ -38,32 +75,35 @@ const GroupPayment = () => {
 
                 <div className="flex justify-between items-center mb-6">
                     <span className="text-sm font-semibold">Integrantes</span>
-                    <button className="flex items-center gap-1.5 bg-[#00B8DB] text-white text-xs px-3 py-1.5 rounded-md">
+                    <button 
+                        onClick={() => navigator.clipboard.writeText(window.location.href)}
+                        className="flex items-center gap-1.5 bg-[#00B8DB] text-white text-xs px-3 py-1.5 rounded-md"
+                    >
                         Link de pago <LinkIcon size={14} />
                     </button>
                 </div>
 
                 <div className="space-y-4">
                     {members.map((member, index) => (
-                        <div key={index} className={`flex items-center p-4 border rounded-2xl ${member.selected ? 'border-[#00B8DB]' : 'border-[#E0DDDD]'}`}>
+                        <div key={index} className={`flex items-center p-4 border rounded-2xl`}>
                             <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-4">
                                 <User size={20} className="text-gray-500" />
                             </div>
                             <div className="flex-grow">
-                                <p className="font-medium">{member.name}</p>
-                                <p className="text-xs text-gray-500">{member.date}</p>
+                                <p className="font-medium">{member.member_name}</p>
                             </div>
-                            {getStatusChip(member.status)}
+                            {/* NOTE: Payment status per member needs to be implemented */}
+                            {getStatusChip('pendiente')}
                         </div>
                     ))}
                 </div>
 
                 <div className="mt-12">
                     <button 
-                        onClick={() => navigate('/transfer-payment')}
+                        onClick={() => navigate(`/payment/transfer/group/${groupId}`)}
                         className="w-full bg-[#00B8DB] text-white py-4 rounded-full font-medium"
                     >
-                        Pagar cuota de Ana Garcez
+                        Pagar mi cuota
                     </button>
                 </div>
             </main>
