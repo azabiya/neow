@@ -161,7 +161,7 @@ const AssistantHome = () => {
   return (
     <div className="bg-white min-h-screen font-inter">
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <h1 className="text-[40px] font-normal text-[#00B8DB] font-days md:hidden">NEOW&lt;</h1>
+        <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div>
         <Bell className="w-6 h-6 text-gray-400" />
       </header>
@@ -191,7 +191,7 @@ const AssistantHome = () => {
         </div>
       
         <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="bg-[#00B8DB] text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
+          <div className="bg-yana-yellow text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
             <p className="text-sm">Ingresos pendientes:</p>
             <p className="text-3xl font-bold mt-1">${stats.pendingIncome.toFixed(2)}</p>
           </div>

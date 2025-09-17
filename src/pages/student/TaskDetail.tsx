@@ -245,13 +245,13 @@ const TaskDetail = () => {
             {timeline.map((step, index) => (
               <div key={index} className="flex items-start relative pb-6 last:pb-0">
                 <div className="flex-shrink-0 mr-4">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${step.is_current ? 'bg-[#00B8DB]' : 'border-2 border-gray-300 bg-white'}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${step.is_current ? 'bg-yana-yellow' : 'border-2 border-gray-300 bg-white'}`}>
                     {step.is_current && <CheckCircle2 size={16} className="text-white" strokeWidth={3} />}
                   </div>
                 </div>
                 {index < timeline.length - 1 && (<div className="absolute left-3 top-6 w-0.5 h-full bg-gray-200"></div>)}
                 <div>
-                  <p className={`font-medium text-sm ${step.is_current ? 'text-[#00B8DB]' : 'text-gray-700'}`}>{step.title}</p>
+                  <p className={`font-medium text-sm ${step.is_current ? 'text-yana-yellow' : 'text-gray-700'}`}>{step.title}</p>
                   <p className="text-xs text-gray-400 mt-1">{new Date(step.completed_at).toLocaleString('es-ES')}</p>
                 </div>
               </div>

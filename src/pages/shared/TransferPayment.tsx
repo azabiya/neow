@@ -147,7 +147,7 @@ const TransferPayment = () => {
 
     const SelectInput = ({ label, value, onChange, name, required = false }) => (
         <div className="relative">
-            <select name={name} value={value} onChange={onChange} required={required} className="w-full p-2 border-b border-gray-300 text-gray-700 bg-white appearance-none focus:outline-none focus:border-[#00B8DB]">
+            <select name={name} value={value} onChange={onChange} required={required} className="w-full p-2 border-b border-gray-300 text-gray-700 bg-white appearance-none focus:outline-none focus:border-yana-yellow">
                 <option value="">{label}</option>
                 <option value="Banco Pichincha">Banco Pichincha</option>
                 <option value="Banco Guayaquil">Banco Guayaquil</option>
@@ -164,7 +164,7 @@ const TransferPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <h1 className="text-4xl font-normal text-[#00B8DB] font-days">NEOW&lt;</h1>
+                <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow flex items-center justify-center">
@@ -209,7 +209,7 @@ const TransferPayment = () => {
                     <button 
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-[#00B8DB] text-white py-3 rounded-full font-medium disabled:bg-gray-400"
+                        className="w-full bg-yana-yellow text-white py-3 rounded-full font-medium disabled:bg-gray-400"
                     >
                         {isSubmitting ? 'Confirmando...' : 'Confirmar'}
                     </button>
@@ -217,7 +217,7 @@ const TransferPayment = () => {
             </main>
 
             <footer className="text-center text-gray-500 text-sm py-6">
-                © 2025 NEOW. Todos los derechos reservados.
+                © 2025 YANA MAKI. Todos los derechos reservados.
             </footer>
         </div>
     );

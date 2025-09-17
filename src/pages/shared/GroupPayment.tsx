@@ -67,7 +67,7 @@ const GroupPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <h1 className="text-4xl font-normal text-[#00B8DB] font-days">NEOW&lt;</h1>
+                <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow">
@@ -77,7 +77,7 @@ const GroupPayment = () => {
                     <span className="text-sm font-semibold">Integrantes</span>
                     <button 
                         onClick={() => navigator.clipboard.writeText(window.location.href)}
-                        className="flex items-center gap-1.5 bg-[#00B8DB] text-white text-xs px-3 py-1.5 rounded-md"
+                        className="flex items-center gap-1.5 bg-yana-yellow text-white text-xs px-3 py-1.5 rounded-md"
                     >
                         Link de pago <LinkIcon size={14} />
                     </button>
@@ -101,7 +101,7 @@ const GroupPayment = () => {
                 <div className="mt-12">
                     <button 
                         onClick={() => navigate(`/payment/transfer/group/${groupId}`)}
-                        className="w-full bg-[#00B8DB] text-white py-4 rounded-full font-medium"
+                        className="w-full bg-yana-yellow text-white py-4 rounded-full font-medium"
                     >
                         Pagar mi cuota
                     </button>
@@ -109,7 +109,7 @@ const GroupPayment = () => {
             </main>
 
             <footer className="text-center text-gray-500 text-sm py-6">
-                © 2025 NEOW. Todos los derechos reservados.
+                © 2025 YANA MAKI. Todos los derechos reservados.
             </footer>
         </div>
     );
