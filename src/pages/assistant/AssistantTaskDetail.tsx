@@ -1,21 +1,67 @@
 // src/pages/assistant/AssistantTaskDetail.tsx
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, FileText, CheckCircle2, Upload, X } from 'lucide-react';
+import { FileText, CheckCircle2, Upload, X } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
+
+// --- TYPE DEFINITIONS ---
+interface FileObject {
+  id: string;
+  original_name: string;
+  file_path: string;
+  file_size?: number;
+  mime_type?: string;
+}
+
+interface TaskFile {
+  upload_type: string;
+  file: FileObject;
+}
+
+interface Student {
+  id: string;
+  full_name: string;
+  phone: string;
+}
+
+interface Task {
+  id: string;
+  title: string;
+  status: string;
+  due_date: string;
+  assistant_price: number;
+  page_count: number;
+  format: string;
+  max_ai_percentage: number;
+  max_plagiarism_percentage: number;
+  description: string;
+  career: { name: string } | null;
+  task_type: { name:string } | null;
+  student: Student | null;
+}
+
+interface TimelineStep {
+  id: string;
+  is_current: boolean;
+  title: string;
+  completed_at: string;
+  status: string;
+}
+
+type UploadType = 'updates' | 'final_submission';
 
 const AssistantTaskDetail = () => {
   const { taskId } = useParams();
   const navigate = useNavigate();
-  const [task, setTask] = useState(null);
-  const [timeline, setTimeline] = useState([]);
-  const [files, setFiles] = useState([]);
-  const [student, setStudent] = useState(null);
+  const [task, setTask] = useState<Task | null>(null);
+  const [timeline, setTimeline] = useState<TimelineStep[]>([]);
+  const [files, setFiles] = useState<TaskFile[]>([]);
+  const [student, setStudent] = useState<Student | null>(null);
   const [loading, setLoading] = useState(true);
-  const [uploadingType, setUploadingType] = useState(null); // Estado para controlar qué botón carga
-  const fileInputRef = useRef(null);
-  const [filesToUpload, setFilesToUpload] = useState([]);
+  const [uploadingType, setUploadingType] = useState<UploadType | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [filesToUpload, setFilesToUpload] = useState<File[]>([]);
 
   useEffect(() => {
     const fetchTaskData = async () => {
@@ -63,8 +109,11 @@ const AssistantTaskDetail = () => {
         `)
         .eq('task_id', taskId);
 
-      if (filesError) console.error('Error fetching files:', filesError);
-      else setFiles(filesData);
+      if (filesError) {
+        console.error('Error fetching files:', filesError);
+      } else if (filesData) {
+        setFiles(filesData as unknown as TaskFile[]);
+      }
 
       setLoading(false);
     };
@@ -72,9 +121,9 @@ const AssistantTaskDetail = () => {
     fetchTaskData();
   }, [taskId]);
 
-  const updateTaskStatus = async (newStatus, timelineTitle) => {
+  const updateTaskStatus = async (newStatus: string, timelineTitle: string) => {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    if (!user || !taskId) return;
   
     await supabase
         .from('task_status_timeline')
@@ -91,6 +140,7 @@ const AssistantTaskDetail = () => {
         created_by: user.id,
         is_current: true
       });
+
     if (timelineInsertError) {
       console.error('Error inserting into timeline:', timelineInsertError);
       return;
@@ -100,32 +150,40 @@ const AssistantTaskDetail = () => {
       .from('tasks')
       .update({ status: newStatus })
       .eq('id', taskId);
+
     if (taskUpdateError) {
       console.error(`Error updating task status to ${newStatus}:`, taskUpdateError);
       return;
     }
   
-    setTask(prev => ({ ...prev, status: newStatus }));
-    const { data: timelineData } = await supabase.from('task_status_timeline').select('*').eq('task_id', taskId).order('completed_at', { ascending: false });
-    setTimeline(timelineData);
+    setTask(prev => prev ? { ...prev, status: newStatus } : null);
+
+    const { data: timelineData } = await supabase
+      .from('task_status_timeline')
+      .select('*')
+      .eq('task_id', taskId)
+      .order('completed_at', { ascending: false });
+
+    if (timelineData) setTimeline(timelineData);
   };
   
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setFilesToUpload(prevFiles => [...prevFiles, ...Array.from(event.target.files)]);
+      setFilesToUpload(prevFiles => [...prevFiles, ...Array.from(event.target.files!)]);
     }
   };
   
-  const removeFileToUpload = (index) => {
+  const removeFileToUpload = (index: number) => {
     setFilesToUpload(filesToUpload.filter((_, i) => i !== index));
   };
   
-  const handleFileUpload = async (uploadType) => {
+  const handleFileUpload = async (uploadType: UploadType) => {
     if (filesToUpload.length === 0) {
       alert("Por favor, selecciona al menos un archivo.");
       return;
     }
-    setUploadingType(uploadType); // <-- Indica qué tipo de subida se está realizando
+    setUploadingType(uploadType);
+
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
         setUploadingType(null);
@@ -133,10 +191,10 @@ const AssistantTaskDetail = () => {
     }
     
     let allUploadsSuccessful = true;
-    const newUploadedFiles = [];
+    const newUploadedFiles: TaskFile[] = [];
 
     for (const file of filesToUpload) {
-        const fileExt = file.name.split('.').pop();
+        const fileExt = file.name.split('.').pop() || '';
         const fileName = `${user.id}/${uuidv4()}.${fileExt}`;
 
         try {
@@ -161,44 +219,46 @@ const AssistantTaskDetail = () => {
             
             if (fileInsertError) throw fileInsertError;
             
-            const { error: linkError } = await supabase.from('task_files').insert({
-                task_id: taskId,
-                file_id: fileData.id,
-                upload_type: uploadType,
-            });
+            if (fileData) {
+              const { error: linkError } = await supabase.from('task_files').insert({
+                  task_id: taskId,
+                  file_id: fileData.id,
+                  upload_type: uploadType,
+              });
 
-            if (linkError) throw linkError;
+              if (linkError) throw linkError;
 
-            newUploadedFiles.push({
-                upload_type: uploadType,
-                file: {
-                    id: fileData.id,
-                    original_name: file.name,
-                    file_path: fileName
-                }
-            });
-
+              newUploadedFiles.push({
+                  upload_type: uploadType,
+                  file: {
+                      id: fileData.id,
+                      original_name: file.name,
+                      file_path: fileName
+                  }
+              });
+            }
         } catch (error) {
             console.error('File upload failed:', error);
-            alert(`Error al procesar el archivo ${file.name}: ${error.message}`);
+            const message = error instanceof Error ? error.message : 'Ocurrió un error desconocido';
+            alert(`Error al procesar el archivo ${file.name}: ${message}`);
             allUploadsSuccessful = false;
             break; 
         }
     }
     
-    setUploadingType(null); // <-- Resetea el estado de carga
+    setUploadingType(null);
 
-    if (allUploadsSuccessful) {
-        setFiles(prev => [...prev, ...newUploadedFiles]);
-        setFilesToUpload([]);
+    if (allUploadsSuccessful && newUploadedFiles.length > 0) {
+      setFiles(prev => [...prev, ...newUploadedFiles]);
+      setFilesToUpload([]);
 
-        if (uploadType === 'final_submission') {
-            await updateTaskStatus('Tarea Completada', 'Entrega final enviada');
-        } else {
-            await updateTaskStatus('Avance Enviado', 'Avance enviado');
-        }
+      if (uploadType === 'final_submission') {
+          await updateTaskStatus('Tarea Completada', 'Entrega final enviada');
+      } else {
+          await updateTaskStatus('Avance Enviado', 'Avance enviado');
+      }
     }
-  }
+  };
 
   if (loading) return <div className="p-10">Cargando detalles de la tarea...</div>;
   if (!task) return <div className="p-10">No se encontró la tarea.</div>;
@@ -301,7 +361,7 @@ const AssistantTaskDetail = () => {
                 <Upload className="text-gray-400 mb-4" size={32}/>
                 <p className="text-gray-400 text-xs">Sube tus archivos aquí.</p>
                 <input type="file" ref={fileInputRef} onChange={handleFileChange} multiple className="hidden" />
-                <button onClick={() => fileInputRef.current.click()} className="mt-4 bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold">Seleccionar archivos</button>
+                <button onClick={() => fileInputRef.current?.click()} className="mt-4 bg-gray-200 px-4 py-2 rounded-lg text-sm font-semibold">Seleccionar archivos</button>
             </div>
             <div className="mt-4 space-y-2">
                 {filesToUpload.map((file, index) => (

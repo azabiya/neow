@@ -4,18 +4,37 @@ import { Bell, Star, CheckCircle2, Timer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
+interface ProfileData {
+  id: string;
+  full_name: string;
+  profile_picture_id: string | null;
+}
+
+interface TaskData {
+  id: number;
+  title: string;
+  status: string;
+  due_date: string;
+  assistant_price: number;
+  student: {
+    full_name: string;
+  } | null;
+  users?: { full_name: string }[] | { full_name: string } | null;
+  student_id: string;
+}
+
 const AssistantHome = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
   const [stats, setStats] = useState({
     avgRating: 0,
     totalTasks: 0,
     totalIncome: 0,
     pendingIncome: 0,
   });
-  const [tasks, setTasks] = useState([]);
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [tasks, setTasks] = useState<TaskData[]>([]);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +56,9 @@ const AssistantHome = () => {
         
         if (profileError) {
           console.error('Error fetching profile:', profileError);
-        } else {
+        } else if (profileData) {
           setProfile(profileData);
-          if (profileData?.profile_picture_id) {
+          if (profileData.profile_picture_id) {
             const { data: fileData } = await supabase
               .from('files')
               .select('file_path')
@@ -105,29 +124,32 @@ const AssistantHome = () => {
         if (inProgressError) {
           console.error('Error fetching in-progress tasks:', inProgressError);
           setTasks([]);
-        } else {
-          if (inProgressTasks && inProgressTasks.length > 0) {
-            const tasksWithStudents = await Promise.all(
-              inProgressTasks.map(async (task) => {
-                if (task.users) return { ...task, student: task.users };
-                
+        } else if (inProgressTasks) {
+          const tasksWithStudents = await Promise.all(
+            inProgressTasks.map(async (task) => {
+              let student = null;
+              if (task.users) {
+                // Si 'users' es un array, toma el primer elemento; si es un objeto, úsalo directamente.
+                const studentData = Array.isArray(task.users) ? task.users[0] : task.users;
+                student = studentData || { full_name: 'Usuario desconocido' };
+              } else if (task.student_id) {
                 const { data: studentData } = await supabase
                   .from('users')
                   .select('full_name')
                   .eq('id', task.student_id)
                   .single();
-                
-                return {
-                  ...task,
-                  student: studentData || { full_name: 'Usuario desconocido' }
-                };
-              })
-            );
-            
-            setTasks(tasksWithStudents);
-          } else {
-            setTasks([]);
-          }
+                student = studentData || { full_name: 'Usuario desconocido' };
+              }
+
+              return {
+                ...task,
+                student,
+              };
+            })
+          );
+          setTasks(tasksWithStudents.filter(Boolean) as TaskData[]);
+        } else {
+          setTasks([]);
         }
 
       } catch (error) {

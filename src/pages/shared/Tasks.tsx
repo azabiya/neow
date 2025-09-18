@@ -4,9 +4,18 @@ import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 
+interface Task {
+  id: string;
+  title: string;
+  due_date: string;
+  status: string;
+  student: { full_name: string } | null;
+  assistant: { full_name: string } | null;
+}
+
 const Tasks = () => {
   const [activeTab, setActiveTab] = useState('Pendientes');
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const context = useOutletContext<{ userRole: 'student' | 'assistant' }>();
@@ -43,8 +52,8 @@ const Tasks = () => {
 
         if (error) {
           console.error('Error fetching tasks:', error);
-        } else {
-          setTasks(data);
+        } else if (data) {
+          setTasks(data as unknown as Task[]);
         }
       }
       setLoading(false);

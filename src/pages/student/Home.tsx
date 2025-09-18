@@ -2,23 +2,45 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Bell, FileText, BarChart3, Timer } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 
-// Custom debounce function to avoid lodash dependency.
-const debounce = (func, delay) => {
-  let timeout;
-  return (...args) => {
-    const context = this;
+interface TaskType {
+  id: string;
+  name: string;
+  icon: keyof typeof iconMap;
+}
+
+interface Task {
+  id: string;
+  title: string;
+  due_date: string;
+  status: string;
+  assistant: { full_name: string } | null;
+}
+
+const debounce = <F extends (...args: any[]) => any>(func: F, delay: number) => {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<F>) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), delay);
+    timeout = setTimeout(() => {
+      func(...args);
+    }, delay);
   };
+};
+
+const iconMap: { [key: string]: React.FC<LucideProps> } = {
+  FileText: FileText,
+  BarChart3: BarChart3,
+  Repeat: Timer,
+  Timer: Timer,
 };
 
 const Home = () => {
   const navigate = useNavigate();
-  const [taskTypes, setTaskTypes] = useState([]);
+  const [taskTypes, setTaskTypes] = useState<TaskType[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const debouncedSetSearchTerm = useRef(debounce(setSearchTerm, 500)).current;
 
   useEffect(() => {
@@ -30,8 +52,8 @@ const Home = () => {
 
       if (error) {
         console.error('Error fetching task types:', error);
-      } else {
-        setTaskTypes(data);
+      } else if (data) {
+        setTaskTypes(data as TaskType[]);
       }
     };
 
@@ -50,12 +72,12 @@ const Home = () => {
             )
           `)
           .eq('student_id', user.id)
-          .neq('status', 'Tarea Completada'); // Condición actualizada al nuevo valor del enum
+          .neq('status', 'Tarea Completada');
 
         if (error) {
           console.error('Error fetching tasks:', error);
-        } else {
-          setTasks(data);
+        } else if (data) {
+          setTasks(data as unknown as Task[]);
         }
       }
     };
@@ -70,15 +92,8 @@ const Home = () => {
     }
   }, [searchTerm, navigate]);
 
-  const handleTaskTypeClick = (taskTypeId, taskTypeName) => {
-    navigate('/create-task', { state: { preselectedTaskType: { id: taskTypeId, name: taskTypeName } } });
-  };
-
-  const iconMap = {
-    FileText: FileText,
-    BarChart3: BarChart3,
-    Repeat: Timer,
-    Timer: Timer,
+  const handleTaskTypeClick = (taskType: TaskType) => {
+    navigate('/create-task', { state: { preselectedTaskType: taskType } });
   };
 
   return (
@@ -118,7 +133,7 @@ const Home = () => {
               <div
                 key={index}
                 className="flex flex-col items-center text-center w-16 cursor-pointer"
-                onClick={() => handleTaskTypeClick(task.id, task.name)}
+                onClick={() => handleTaskTypeClick(task)}
               >
                 <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-2 transition-colors bg-gray-100 border border-gray-200 hover:border-cyan-300`}>
                   <IconComponent className={`w-8 h-8 text-gray-500`} />

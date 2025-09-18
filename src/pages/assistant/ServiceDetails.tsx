@@ -1,20 +1,27 @@
 // src/pages/assistant/ServiceDetails.tsx
 import { useState, useEffect } from 'react';
+import type { LucideProps } from 'lucide-react';
 import { ArrowRight, FileText, BarChart3, Repeat } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
+interface Service {
+  id: string;
+  name: string;
+  icon: keyof typeof iconMap;
+  is_enabled: boolean;
+}
+
 // Mapeo de nombres de íconos a componentes
-const iconMap = {
+const iconMap: { [key: string]: React.FC<LucideProps> } = {
   FileText: FileText,
   BarChart3: BarChart3,
   Repeat: Repeat,
-  // Añade más íconos si los tienes
 };
 
 const ServiceDetails = () => {
   const navigate = useNavigate();
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
@@ -62,7 +69,7 @@ const ServiceDetails = () => {
     fetchServices();
   }, []);
 
-  const handleServiceClick = (serviceId) => {
+  const handleServiceClick = (serviceId: string) => {
     navigate(`/service-pricing/${serviceId}`);
   };
 

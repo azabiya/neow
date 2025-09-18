@@ -1,10 +1,15 @@
 // src/pages/auth/Login.tsx
 import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
-const Login = ({ setUserRole }) => {
+interface LoginProps {
+  setUserRole: Dispatch<SetStateAction<'student' | 'assistant' | null>>;
+}
+
+const Login = ({ setUserRole }: LoginProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

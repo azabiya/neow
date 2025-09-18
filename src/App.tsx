@@ -1,5 +1,6 @@
 // src/App.tsx
 import { useState, useEffect } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { Home as HomeIcon, NotebookText, User, CreditCard, HelpCircle, LogOut, FilePenLine } from 'lucide-react';
 import { supabase } from './supabaseClient';
@@ -128,7 +129,7 @@ const MainLayout = ({ userRole }: { userRole: string }) => (
 );
 
 
-const FlowLayout = ({ setUserRole }) => (
+const FlowLayout = ({ setUserRole }: { setUserRole: Dispatch<SetStateAction<'student' | 'assistant' | null>> }) => (
   <div className="max-w-md mx-auto min-h-screen font-sans bg-white shadow-lg relative md:max-w-full md:shadow-none">
     <Outlet context={{ setUserRole }} />
   </div>

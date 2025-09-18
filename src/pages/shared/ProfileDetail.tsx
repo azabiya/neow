@@ -1,18 +1,43 @@
 // src/pages/shared/ProfileDetail.tsx
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
+
+// --- TYPE DEFINITIONS ---
+interface University {
+  id: number;
+  name: string;
+}
+
+interface Career {
+  id: number;
+  name: string;
+}
+
+interface Profile {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  role: 'student' | 'assistant';
+  profile_picture_id: string | null;
+}
+
+interface ProfileDetails {
+  university_id: number | null;
+  career_id: number | null;
+  semester: number | null;
+}
 
 const ProfileDetail = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [profile, setProfile] = useState(null);
-    const [profileDetails, setProfileDetails] = useState(null);
-    const [universities, setUniversities] = useState([]);
-    const [careers, setCareers] = useState([]);
-    const [avatarUrl, setAvatarUrl] = useState(null);
-    const fileInputRef = useRef(null);
+    const [profile, setProfile] = useState<Profile | null>(null);
+    const [profileDetails, setProfileDetails] = useState<ProfileDetails | null>(null);
+    const [universities, setUniversities] = useState<University[]>([]);
+    const [careers, setCareers] = useState<Career[]>([]);
+    const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -68,18 +93,18 @@ const ProfileDetail = () => {
         fetchData();
     }, [navigate]);
 
-    const handleInputChange = (e, model) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, model: 'profile' | 'profileDetails') => {
         const { name, value } = e.target;
         if (model === 'profile') {
-            setProfile(prev => ({ ...prev, [name]: value }));
+            setProfile(prev => prev ? { ...prev, [name]: value } : null);
         } else {
-            setProfileDetails(prev => ({ ...prev, [name]: value }));
+            setProfileDetails(prev => prev ? { ...prev, [name]: value } : null);
         }
     };
 
     const handleSaveChanges = async () => {
         const { data: { user } } = await supabase.auth.getUser();
-        if (!user) return;
+        if (!user || !profile || !profileDetails) return;
 
         // Actualizar tabla 'users'
         const { error: userError } = await supabase
@@ -111,11 +136,11 @@ const ProfileDetail = () => {
     };
 
     const handleUploadClick = () => {
-        fileInputRef.current.click();
+        fileInputRef.current?.click();
     };
     
-    const handleFileChange = async (event) => {
-        const file = event.target.files[0];
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
         if (!file) return;
 
         const { data: { user } } = await supabase.auth.getUser();
@@ -124,9 +149,8 @@ const ProfileDetail = () => {
         const fileExt = file.name.split('.').pop();
         const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
-        // Subir a Storage
         const { error: uploadError } = await supabase.storage
-            .from('task_files') // Asumiendo que las fotos de perfil se guardan en el mismo bucket
+            .from('task_files')
             .upload(fileName, file);
 
         if (uploadError) {
@@ -134,7 +158,6 @@ const ProfileDetail = () => {
             return;
         }
 
-        // Insertar en tabla 'files'
         const { data: fileData, error: fileInsertError } = await supabase
             .from('files')
             .insert({
@@ -148,12 +171,11 @@ const ProfileDetail = () => {
                 upload_context: 'profile_picture'
             }).select('id').single();
         
-        if (fileInsertError) {
+        if (fileInsertError || !fileData) {
             alert('Error al registrar el archivo.');
             return;
         }
 
-        // Actualizar 'users' con el ID del archivo
         const { error: userUpdateError } = await supabase
             .from('users')
             .update({ profile_picture_id: fileData.id })
@@ -164,14 +186,13 @@ const ProfileDetail = () => {
         } else {
             const { data: { publicUrl } } = supabase.storage.from('task_files').getPublicUrl(fileName);
             setAvatarUrl(publicUrl);
+            setProfile(prev => prev ? { ...prev, profile_picture_id: fileData.id } : null);
         }
     };
     
     const handleRemovePhoto = async () => {
         const { data: { user } } = await supabase.auth.getUser();
-        if (!user || !profile.profile_picture_id) return;
-
-        // Aquí deberías añadir lógica para eliminar el archivo del storage si lo deseas.
+        if (!user || !profile?.profile_picture_id) return;
         
         const { error } = await supabase
             .from('users')
@@ -182,7 +203,7 @@ const ProfileDetail = () => {
             alert('Error al eliminar la foto.');
         } else {
             setAvatarUrl(null);
-            setProfile(prev => ({ ...prev, profile_picture_id: null }));
+            setProfile(prev => prev ? { ...prev, profile_picture_id: null } : null);
         }
     };
 
@@ -233,21 +254,21 @@ const ProfileDetail = () => {
                         <div className="grid grid-cols-1 gap-y-6">
                             <div>
                                 <label className="text-sm text-gray-600">Universidad:</label>
-                                <select name="university_id" value={profileDetails?.university_id || ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
+                                <select name="university_id" value={profileDetails?.university_id ?? ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
                                     <option value="">Selecciona</option>
                                     {universities.map(uni => <option key={uni.id} value={uni.id}>{uni.name}</option>)}
                                 </select>
                             </div>
                             <div>
                                 <label className="text-sm text-gray-600">Carrera:</label>
-                                 <select name="career_id" value={profileDetails?.career_id || ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
+                                 <select name="career_id" value={profileDetails?.career_id ?? ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
                                     <option value="">Selecciona</option>
                                     {careers.map(car => <option key={car.id} value={car.id}>{car.name}</option>)}
                                 </select>
                             </div>
                              <div>
                                 <label className="text-sm text-gray-600">Semestre:</label>
-                                <select name="semester" value={profileDetails?.semester || ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
+                                <select name="semester" value={profileDetails?.semester ?? ''} onChange={(e) => handleInputChange(e, 'profileDetails')} className="w-full mt-1 p-3 border border-gray-300 rounded-lg bg-white">
                                     <option value="">Selecciona</option>
                                     {Array.from({ length: 12 }, (_, i) => i + 1).map(s => <option key={s} value={s}>{s}º Semestre</option>)}
                                 </select>

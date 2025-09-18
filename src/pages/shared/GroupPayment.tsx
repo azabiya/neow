@@ -4,11 +4,17 @@ import { User, Link as LinkIcon } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
+interface GroupMember {
+  id: string;
+  group_id: string;
+  member_name: string;
+  payment_status: 'pendiente' | 'enviado' | 'verificado' | 'invalido';
+}
+
 const GroupPayment = () => {
     const navigate = useNavigate();
     const { groupId } = useParams();
-    const [members, setMembers] = useState([]);
-    const [task, setTask] = useState(null);
+    const [members, setMembers] = useState<GroupMember[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -16,7 +22,7 @@ const GroupPayment = () => {
             if (!groupId) return;
 
             // Fetch group and task details
-            const { data: groupData, error: groupError } = await supabase
+            const { error: groupError } = await supabase
                 .from('payment_groups')
                 .select(`*, task:tasks(*)`)
                 .eq('id', groupId)
@@ -27,7 +33,6 @@ const GroupPayment = () => {
                 setLoading(false);
                 return;
             }
-            setTask(groupData.task);
 
             // Fetch members
             const { data: membersData, error: membersError } = await supabase

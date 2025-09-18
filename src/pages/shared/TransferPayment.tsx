@@ -5,12 +5,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 
+interface Task {
+  id: string;
+  total_price: number;
+}
+
+interface SelectInputProps {
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  name: string;
+  required?: boolean;
+}
+
+
 const TransferPayment = () => {
     const navigate = useNavigate();
-    const { paymentType, id } = useParams(); // id can be taskId or groupId
-    const [task, setTask] = useState(null);
+    const { paymentType, id } = useParams<{ paymentType: string; id: string }>();
+    const [task, setTask] = useState<Task | null>(null);
     const [amount, setAmount] = useState(0);
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [senderName, setSenderName] = useState('');
@@ -61,25 +75,28 @@ const TransferPayment = () => {
         }
     }, [paymentType, id, navigate]);
     
-    const handleFileChange = (e) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
         }
     };
 
-    const handleConfirmPayment = async (e) => {
+    const handleConfirmPayment = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!file) {
+        if (!file) {
             alert("Por favor, sube un comprobante de pago.");
+            return;
+        }
+        if (!task) {
+            alert("No se ha podido cargar la información de la tarea.");
             return;
         }
 
         const { data: { user } } = await supabase.auth.getUser();
-        if(!user) return;
+        if (!user) return;
         
         setIsSubmitting(true);
 
-        // 1. Upload receipt
         const fileExt = file.name.split('.').pop();
         const fileName = `${user.id}/${uuidv4()}.${fileExt}`;
         const { error: uploadError } = await supabase.storage
@@ -93,7 +110,6 @@ const TransferPayment = () => {
             return;
         }
 
-        // 2. Insert file record
         const { data: fileData, error: fileInsertError } = await supabase
             .from('files')
             .insert({
@@ -107,18 +123,17 @@ const TransferPayment = () => {
                 upload_context: 'payment_receipt'
             }).select('id').single();
 
-        if (fileInsertError) {
-            alert(`Error al registrar el archivo en la base de datos: ${fileInsertError.message}`);
+        if (fileInsertError || !fileData) {
+            alert(`Error al registrar el archivo en la base de datos.`);
             setIsSubmitting(false);
             return;
         }
         
-        // 3. Create payment record
         const paymentData = {
             task_id: task.id,
             payer_user_id: user.id,
             amount: amount,
-            payment_method: 'bank_transfer', // <-- CORRECCIÓN FINAL AQUÍ
+            payment_method: 'bank_transfer',
             sender_name: senderName,
             sender_bank: originBank,
             recipient_bank: destinationBank,
@@ -136,7 +151,6 @@ const TransferPayment = () => {
             return;
         }
 
-        // 4. Update task status
         await supabase.from('tasks').update({ status: 'Tarea Pagada' }).eq('id', task.id);
         
         setIsSubmitting(false);
@@ -145,7 +159,7 @@ const TransferPayment = () => {
 
     if (loading) return <div className="flex items-center justify-center h-screen">Cargando...</div>;
 
-    const SelectInput = ({ label, value, onChange, name, required = false }) => (
+    const SelectInput = ({ label, value, onChange, name, required = false }: SelectInputProps) => (
         <div className="relative">
             <select name={name} value={value} onChange={onChange} required={required} className="w-full p-2 border-b border-gray-300 text-gray-700 bg-white appearance-none focus:outline-none focus:border-[#00B8DB]">
                 <option value="">{label}</option>

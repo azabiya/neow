@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { FileText, X } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 
-const ImageViewerModal = ({ imageUrl, onClose }) => (
+interface ImageViewerModalProps {
+  imageUrl: string;
+  onClose: () => void;
+}
+
+const ImageViewerModal = ({ imageUrl, onClose }: ImageViewerModalProps) => (
     <div 
         className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 backdrop-blur-sm"
         onClick={onClose}
@@ -26,11 +31,20 @@ const ImageViewerModal = ({ imageUrl, onClose }) => (
     </div>
 );
 
+interface Payment {
+  id: string;
+  amount: number;
+  status: string;
+  transfer_date: string;
+  task: { title: string } | null;
+  receipt: { file_path: string } | null;
+}
+
 const PaymentHistory = () => {
     const navigate = useNavigate();
-    const [payments, setPayments] = useState([]);
+    const [payments, setPayments] = useState<Payment[]>([]);
     const [loading, setLoading] = useState(true);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchPayments = async () => {
@@ -59,8 +73,8 @@ const PaymentHistory = () => {
 
             if (error) {
                 console.error('Error fetching payments:', error);
-            } else {
-                setPayments(data);
+      } else if (data) {
+        setPayments(data as unknown as Payment[]);
             }
             setLoading(false);
         };
@@ -68,7 +82,7 @@ const PaymentHistory = () => {
         fetchPayments();
     }, [navigate]);
 
-    const handleViewReceipt = (filePath) => {
+    const handleViewReceipt = (filePath: string | null | undefined) => {
         if (!filePath) return;
         const { data: { publicUrl } } = supabase.storage.from('task_files').getPublicUrl(filePath);
         setSelectedImage(publicUrl);
@@ -98,7 +112,7 @@ const PaymentHistory = () => {
                                     <FileText size={24} />
                                 </button>
                                 <div className="flex-grow">
-                                    <p className="font-semibold text-base text-black">{payment.task.title}</p>
+                                    <p className="font-semibold text-base text-black">{payment.task?.title || 'Tarea no encontrada'}</p>
                                     <p className="text-sm text-gray-500">{new Date(payment.transfer_date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                                 </div>
                                 <div className="text-right ml-4">
