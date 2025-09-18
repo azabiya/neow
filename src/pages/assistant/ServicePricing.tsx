@@ -42,7 +42,7 @@ const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove 
                 </div>
             ))}
         </div>
-        <button onClick={() => onAdd(criterion)} className="flex items-center gap-2 text-yana-yellow mt-6 font-medium text-sm">
+        <button onClick={() => onAdd(criterion)} className="flex items-center gap-2 text-[#00B8DB] mt-6 font-medium text-sm">
             <PlusCircle size={20} />
             Añadir nuevo rango de precios
         </button>
@@ -209,7 +209,7 @@ const ServicePricing = () => {
                     <span className='font-semibold'>{isEnabled ? "Activado" : "Desactivado"}</span>
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" checked={isEnabled} onChange={() => setIsEnabled(!isEnabled)} className="sr-only peer" />
-                        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-yellow-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
+                        <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-800"></div>
                     </label>
                 </div>
             </header>
@@ -224,7 +224,7 @@ const ServicePricing = () => {
                 <button onClick={() => navigate('/service-details')} className="border border-gray-400 text-gray-700 py-3 px-8 rounded-full font-semibold flex items-center justify-center gap-2">
                     <ArrowLeft size={20} /> Descartar
                 </button>
-                <button onClick={handleSaveChanges} className="bg-yana-yellow text-white py-3 px-8 rounded-full font-semibold" disabled={saving}>
+                <button onClick={handleSaveChanges} className="bg-[#00B8DB] text-white py-3 px-8 rounded-full font-semibold" disabled={saving}>
                     {saving ? 'Guardando...' : 'Guardar Cambios'}
                 </button>
             </footer>

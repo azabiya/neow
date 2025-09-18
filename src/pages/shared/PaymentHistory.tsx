@@ -89,10 +89,10 @@ const PaymentHistory = () => {
                 <main>
                     <div className="space-y-3">
                         {payments.map((payment) => (
-                            <div key={payment.id} className="bg-white p-4 rounded-2xl border border-gray-200 flex items-center hover:border-yellow-400 transition-colors">
+                            <div key={payment.id} className="bg-white p-4 rounded-2xl border border-gray-200 flex items-center hover:border-blue-400 transition-colors">
                                 <button 
                                     onClick={() => handleViewReceipt(payment.receipt?.file_path)}
-                                    className="w-12 h-12 bg-yellow-100 text-yana-yellow rounded-full flex items-center justify-center mr-4 flex-shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-12 h-12 bg-blue-100 text-[#00B8DB] rounded-full flex items-center justify-center mr-4 flex-shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                     disabled={!payment.receipt}
                                 >
                                     <FileText size={24} />
@@ -103,7 +103,7 @@ const PaymentHistory = () => {
                                 </div>
                                 <div className="text-right ml-4">
                                     <p className="font-semibold text-base text-black">${payment.amount.toFixed(2)}</p>
-                                    <p className={`text-sm font-semibold ${payment.status === 'verified' ? 'text-green-500' : 'text-yellow-500'}`}>
+                                    <p className={`text-sm font-semibold ${payment.status === 'verified' ? 'text-green-500' : 'text-blue-500'}`}>
                                         {payment.status === 'verified' ? 'Verificado' : 'Pendiente'}
                                     </p>
                                 </div>

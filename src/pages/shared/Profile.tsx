@@ -68,7 +68,7 @@ const Profile = () => {
           <div>
             <div className="flex justify-center items-center gap-1">
                 <p className="text-2xl font-semibold">4.8</p>
-                <Star size={20} className="text-yellow-400 fill-yellow-400" />
+                <Star size={20} className="text-blue-400 fill-blue-400" />
             </div>
             <p className="text-sm text-gray-500">Promedio</p>
           </div>

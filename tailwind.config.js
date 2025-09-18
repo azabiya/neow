@@ -13,7 +13,7 @@ export default {
         'inter': ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
-        'yana-yellow': '#FCAE06',
+        'primary': '#FCAE06',
         'brand-dark': '#1A1A1A',
         'brand-gray': '#F2F2F2',
         'brand-gray-dark': '#A9A9A9',

@@ -7,7 +7,7 @@ import { supabase } from '../../supabaseClient'; // Import supabase client
 // --- ICONOS (Sin cambios) ---
 
 const QualityIcon = () => (
-    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M16 13H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -17,13 +17,13 @@ const QualityIcon = () => (
 );
 
 const TimeIcon = () => (
-    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
 const SecurityIcon = () => (
-     <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M23 21V19C22.9992 17.962 22.5891 16.9631 21.8519 16.2259C21.1147 15.4887 20.1158 15.0786 19.078 15.078" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -179,8 +179,8 @@ const LandingStudent: React.FC = () => {
                             </nav>
                         </div>
                         <div className="flex items-center gap-2 md:gap-4">
-                            <button onClick={() => navigate('/login')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Iniciar sesión</button>
-                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button>
+                            <button onClick={() => navigate('/login')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Ingresa</button>
+                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button>
                         </div>
                     </div>
                 </header>
@@ -200,35 +200,35 @@ const LandingStudent: React.FC = () => {
             {/* Qué es YANA MAKI? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-yana-yellow">YANA MAKI?</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
                     <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
-                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button></div>
+                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>
 
             {/* Por qué usar YANA MAKI? Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-yana-yellow">YANA MAKI?</span></h2></div>
+                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#00B8DB]">YANA MAKI?</span></h2></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                             <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
+                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">TAREAS DE CALIDAD</h3>
                                 <p className="mt-2 text-sm text-gray-500">Asistentes verificados y calificados por otros estudiantes garantizan un trabajo impecable.</p>
                             </div>
                              <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
+                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">ENTREGAS A TIEMPO</h3>
                                 <p className="mt-2 text-sm text-gray-500">Establece tu fecha de entrega y recibe tu tarea sin demoras. ¡Adiós al estrés de última hora!</p>
                             </div>
                              <div className="flex flex-col items-center">
-                                <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
+                                <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
                                 <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea.</p>
                             </div>
                         </div>
-                        <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button></div>
+                        <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                     </div>
                  </div>
             </section>
@@ -242,10 +242,10 @@ const LandingStudent: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-16">
                         <div className="relative">
-                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-yellow-200 hidden md:block"></div>
+                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-blue-200 hidden md:block"></div>
                             {steps.map((step, index) => (
                                 <div key={index} className="flex items-start relative" style={{ paddingBottom: index === steps.length - 1 ? 0 : '3rem' }}>
-                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-yana-yellow rounded-full flex items-center justify-center text-yana-yellow font-bold text-2xl z-10">{index + 1}</div>
+                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-[#00B8DB] rounded-full flex items-center justify-center text-[#00B8DB] font-bold text-2xl z-10">{index + 1}</div>
                                     <div className="ml-6 pt-1">
                                         <h3 className="text-xl font-bold text-black">{step.title}</h3>
                                         <p className="mt-2 text-gray-600">{step.description}</p>
@@ -253,13 +253,13 @@ const LandingStudent: React.FC = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className="flex justify-center md:justify-end"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Crear tarea</button></div>
+                        <div className="flex justify-center md:justify-end"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Crear tarea</button></div>
                     </div>
                 </div>
             </section>
 
             {/* Stats Section */}
-            <section className="bg-yellow-100 py-12">
+            <section className="bg-blue-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+{stats.completedTasks}</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">{stats.availableAssistants}</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
@@ -289,7 +289,7 @@ const LandingStudent: React.FC = () => {
                                 <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4">
                                     <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
                                     <div className="flex items-center mt-6">
-                                        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-xl font-bold text-yana-yellow">
+                                        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl font-bold text-[#00B8DB]">
                                             {testimonial.name.charAt(0)}
                                         </div>
                                         <div className="ml-4">
@@ -318,12 +318,12 @@ const LandingStudent: React.FC = () => {
             <section className="py-20 lg:py-24">
                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                      <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                         <h2 className="text-3xl font-bold text-yana-yellow">¿Listo para mejorar tus calificaciones?</h2>
+                         <h2 className="text-3xl font-bold text-[#00B8DB]">¿Listo para mejorar tus calificaciones?</h2>
                          <p className="mt-4 max-w-2xl mx-auto text-gray-600">
                            Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con YANA MAKI. El registro es gratis y toma menos de un minuto.
                          </p>
                          <div className="mt-8">
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">
                                 Regístrate
                             </button>
                          </div>
@@ -339,9 +339,9 @@ const LandingStudent: React.FC = () => {
                             <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
-                            <a href="#" className="hover:text-yana-yellow"><InstagramIcon /></a>
-                            <a href="#" className="hover:text-yana-yellow"><FacebookIcon /></a>
-                            <a href="#" className="hover:text-yana-yellow"><TikTokIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><FacebookIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><TikTokIcon /></a>
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">

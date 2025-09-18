@@ -176,7 +176,7 @@ const AssistantHome = () => {
           <div>
             <div className="flex items-center justify-center gap-1">
               <p className="text-2xl font-bold">{stats.avgRating.toFixed(1)}</p>
-              <Star size={20} className="text-yellow-400 fill-yellow-400" />
+              <Star size={20} className="text-blue-400 fill-yellow-400" />
             </div>
             <p className="text-xs text-gray-500 mt-1">Calif. promedio</p>
           </div>
@@ -191,7 +191,7 @@ const AssistantHome = () => {
         </div>
       
         <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="bg-yana-yellow text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
+          <div className="bg-[#00B8DB] text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
             <p className="text-sm">Ingresos pendientes:</p>
             <p className="text-3xl font-bold mt-1">${stats.pendingIncome.toFixed(2)}</p>
           </div>

@@ -12,8 +12,8 @@ const PaymentSuccess = () => {
 
       <main className="flex-grow flex flex-col items-center justify-center">
         <div className="bg-white border border-gray-200 rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
-          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-yana-yellow">
-            <Check size={32} className="text-yana-yellow" strokeWidth={3} />
+          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-[#00B8DB]">
+            <Check size={32} className="text-[#00B8DB]" strokeWidth={3} />
           </div>
           <h2 className="text-xl font-medium text-black mb-3">¡Pago exitoso!</h2>
           <p className="text-gray-600 text-xs mb-8 px-4">
@@ -22,7 +22,7 @@ const PaymentSuccess = () => {
           </p>
           <button
             onClick={() => navigate('/create-task')}
-            className="w-full inline-block bg-yana-yellow text-white py-3 px-6 rounded-lg font-normal text-sm"
+            className="w-full inline-block bg-[#00B8DB] text-white py-3 px-6 rounded-lg font-normal text-sm"
           >
             Crea una nueva tarea
           </button>

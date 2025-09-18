@@ -32,7 +32,7 @@ const StepInput = ({ id, label, type = 'text', placeholder, value, onChange }: {
         <div>
             <label className="block text-black text-sm font-normal mb-1 text-left" htmlFor={id}>{label}:</label>
             <div className="relative">
-                <input id={id} name={id} type={isPassword && showPassword ? 'text' : type} placeholder={placeholder} value={value} onChange={onChange} className="w-full py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yana-yellow" required />
+                <input id={id} name={id} type={isPassword && showPassword ? 'text' : type} placeholder={placeholder} value={value} onChange={onChange} className="w-full py-2 bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#00B8DB]" required />
                 {isPassword && (<button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400">{showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}</button>)}
             </div>
         </div>
@@ -53,7 +53,7 @@ const Step2 = ({ formData, handleChange, universities, careers }: { formData: Fo
         <div>
             <label className="block text-black text-sm font-normal mb-1">Universidad:</label>
             <div className="relative">
-                <select name="university" value={formData.university} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yana-yellow appearance-none" required>
+                <select name="university" value={formData.university} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#00B8DB] appearance-none" required>
                     <option value="">Selecciona</option>
                     {universities.map(uni => <option key={uni.id} value={uni.id}>{uni.name}</option>)}
                 </select>
@@ -65,7 +65,7 @@ const Step2 = ({ formData, handleChange, universities, careers }: { formData: Fo
         <div>
             <label className="block text-black text-sm font-normal mb-1">Carrera:</label>
             <div className="relative">
-                <select name="career" value={formData.career} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yana-yellow appearance-none" required>
+                <select name="career" value={formData.career} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#00B8DB] appearance-none" required>
                      <option value="">Selecciona</option>
                     {careers.map(car => <option key={car.id} value={car.id}>{car.name}</option>)}
                 </select>
@@ -77,7 +77,7 @@ const Step2 = ({ formData, handleChange, universities, careers }: { formData: Fo
         <div>
             <label className="block text-black text-sm font-normal mb-1">Semestre:</label>
             <div className="relative">
-                <select name="semester" value={formData.semester} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-yana-yellow appearance-none" required>
+                <select name="semester" value={formData.semester} onChange={handleChange} className="w-full py-2 text-gray-700 bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#00B8DB] appearance-none" required>
                     <option value="">Selecciona</option>
                     {Array.from({ length: 12 }, (_, i) => i + 1).map(s => <option key={s} value={s}>{s}º Semestre</option>)}
                 </select>
@@ -259,7 +259,7 @@ const Register = () => {
                     <div className="w-full mb-8">
                         <p className="text-sm text-gray-600 mb-2 text-center">Paso {step} de {totalSteps}</p>
                         <div className="w-full bg-gray-200 rounded-full h-1.5">
-                            <div className="bg-yana-yellow h-1.5 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
+                            <div className="bg-[#00B8DB] h-1.5 rounded-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
                         </div>
                     </div>
                     <div className="flex bg-gray-100 p-1 rounded-full w-full mb-10">
@@ -271,7 +271,7 @@ const Register = () => {
                 {error && <p className="text-red-500 text-center my-4">{error}</p>}
                 <footer className="w-full mt-auto pt-10 flex gap-4">
                     {step > 1 && ( <button onClick={prevStep} disabled={loading} className="w-1/2 py-3 border border-black rounded-lg font-semibold text-black flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"> <ArrowLeft size={20} /> Atrás </button> )}
-                    <button onClick={nextStep} disabled={loading} className={`py-3 bg-yana-yellow text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-yellow-600 transition-colors ${step === 1 ? 'w-full' : 'w-1/2'}`}>
+                    <button onClick={nextStep} disabled={loading} className={`py-3 bg-[#00B8DB] text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-blue-600 transition-colors ${step === 1 ? 'w-full' : 'w-1/2'}`}>
                         {loading ? 'Registrando...' : (step === totalSteps ? 'Finalizar' : 'Siguiente')}
                     </button>
                 </footer>

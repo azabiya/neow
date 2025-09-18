@@ -7,7 +7,7 @@ const NavItem = ({ to, icon: Icon, label }: { to: string, icon: React.ElementTyp
         to={to}
         className={({ isActive }) =>
             `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                isActive ? 'bg-yana-yellow text-white' : 'text-gray-700 hover:bg-gray-100'
+                isActive ? 'bg-yana-blue text-white' : 'text-gray-700 hover:bg-gray-100'
             }`
         }
     >

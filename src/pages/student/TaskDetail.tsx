@@ -245,13 +245,13 @@ const TaskDetail = () => {
             {timeline.map((step, index) => (
               <div key={index} className="flex items-start relative pb-6 last:pb-0">
                 <div className="flex-shrink-0 mr-4">
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${step.is_current ? 'bg-yana-yellow' : 'border-2 border-gray-300 bg-white'}`}>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${step.is_current ? 'bg-[#00B8DB]' : 'border-2 border-gray-300 bg-white'}`}>
                     {step.is_current && <CheckCircle2 size={16} className="text-white" strokeWidth={3} />}
                   </div>
                 </div>
                 {index < timeline.length - 1 && (<div className="absolute left-3 top-6 w-0.5 h-full bg-gray-200"></div>)}
                 <div>
-                  <p className={`font-medium text-sm ${step.is_current ? 'text-yana-yellow' : 'text-gray-700'}`}>{step.title}</p>
+                  <p className={`font-medium text-sm ${step.is_current ? 'text-[#00B8DB]' : 'text-gray-700'}`}>{step.title}</p>
                   <p className="text-xs text-gray-400 mt-1">{new Date(step.completed_at).toLocaleString('es-ES')}</p>
                 </div>
               </div>
@@ -287,7 +287,7 @@ const TaskDetail = () => {
               {task.status === 'Tarea Completada' && (
                   <>
                       <button onClick={handleApproveTask} className="w-full py-3 bg-blue-500 text-white rounded-xl font-semibold">Aprobar Tarea</button>
-                      <button onClick={() => setShowImpugnarModal(true)} className="w-full py-3 bg-yellow-500 text-white rounded-xl font-semibold">Impugnar Tarea</button>
+                      <button onClick={() => setShowImpugnarModal(true)} className="w-full py-3 bg-blue-500 text-white rounded-xl font-semibold">Impugnar Tarea</button>
                   </>
               )}
               {task.status === 'Tarea Aprobada' && (
@@ -307,7 +307,7 @@ const TaskDetail = () => {
                   placeholder="Escribe el motivo de la impugnación..."
                   className="w-full p-2 border rounded min-h-[100px]"
               />
-              <button onClick={handleImpugnarTask} className="w-full mt-4 py-2 bg-yellow-500 text-white rounded">Enviar Impugnación</button>
+              <button onClick={handleImpugnarTask} className="w-full mt-4 py-2 bg-blue-500 text-white rounded">Enviar Impugnación</button>
           </Modal>
       )}
 
@@ -318,7 +318,7 @@ const TaskDetail = () => {
                       <Star 
                           key={star} 
                           size={32} 
-                          className={`cursor-pointer ${rating >= star ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                          className={`cursor-pointer ${rating >= star ? 'text-blue-400 fill-blue-400' : 'text-gray-300'}`}
                           onClick={() => setRating(star)}
                       />
                   ))}

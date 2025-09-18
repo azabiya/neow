@@ -12,7 +12,7 @@ const PasswordInput = ({ label, id, value, onChange }) => (
             name={id}
             value={value}
             onChange={onChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-yana-yellow"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#00B8DB]"
             required
         />
     </div>
@@ -86,7 +86,7 @@ const ChangePassword = () => {
                          <button onClick={() => navigate(-1)} className="border border-gray-400 text-gray-700 py-3 px-8 rounded-full font-semibold">
                             Volver
                         </button>
-                        <button onClick={handleSave} className="bg-yana-yellow text-white py-3 px-8 rounded-full font-semibold" disabled={loading}>
+                        <button onClick={handleSave} className="bg-[#00B8DB] text-white py-3 px-8 rounded-full font-semibold" disabled={loading}>
                             {loading ? 'Guardando...' : 'Guardar Cambios'}
                         </button>
                     </div>

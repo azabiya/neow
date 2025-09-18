@@ -6,8 +6,9 @@ import { supabase } from '../../supabaseClient'; // Import supabase client
 
 // --- ICONOS (Sin cambios) ---
 
+
 const MoneyIcon = () => (
-    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -15,14 +16,14 @@ const MoneyIcon = () => (
 );
 
 const FlexibilityIcon = () => (
-    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
 const GrowthIcon = () => (
-     <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M15 3H21V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -173,8 +174,8 @@ const LandingAssistant: React.FC = () => {
                             </nav>
                         </div>
                         <div className="flex items-center gap-2 md:gap-4">
-                            <button onClick={() => navigate('/login')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Iniciar sesión</button>
-                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button>
+                            <button onClick={() => navigate('/login')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Ingresa</button>
+                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button>
                         </div>
                     </div>
                 </header>
@@ -193,34 +194,34 @@ const LandingAssistant: React.FC = () => {
              {/* Qué es YANA MAKI? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-yana-yellow">YANA MAKI?</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
                     <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
-                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button></div>
+                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>           
             {/* Beneficios Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-yana-yellow">YANA MAKI</span></h2></div>
+                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">YANA MAKI</span></h2></div>
                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                              <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><MoneyIcon /></div>
+                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><MoneyIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">GANA DINERO EXTRA</h3>
                                  <p className="mt-2 text-sm text-gray-500">Recibe pagos seguros por cada tarea que completes en tu cuenta bancaria de Ecuador.</p>
                              </div>
                               <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><FlexibilityIcon /></div>
+                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><FlexibilityIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">HORARIO FLEXIBLE</h3>
                                  <p className="mt-2 text-sm text-gray-500">Trabaja cuándo y dónde quieras, adaptado a tu vida estudiantil.</p>
                              </div>
                               <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><GrowthIcon /></div>
+                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><GrowthIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">DESARROLLA TUS HABILIDADES</h3>
                                  <p className="mt-2 text-sm text-gray-500">Refuerza tus conocimientos y gana experiencia en tu área de estudio.</p>
                              </div>
                          </div>
-                         <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Únete ahora</button></div>
+                         <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Únete ahora</button></div>
                      </div>
                  </div>
             </section>
@@ -234,10 +235,10 @@ const LandingAssistant: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
                         <div className="relative">
-                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-yellow-200 hidden md:block"></div>
+                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-blue-200 hidden md:block"></div>
                             {steps.map((step, index) => (
                                 <div key={index} className="flex items-start relative" style={{ paddingBottom: index === steps.length - 1 ? 0 : '3rem' }}>
-                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-yana-yellow rounded-full flex items-center justify-center text-yana-yellow font-bold text-2xl z-10">{index + 1}</div>
+                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-[#00B8DB] rounded-full flex items-center justify-center text-[#00B8DB] font-bold text-2xl z-10">{index + 1}</div>
                                     <div className="ml-6 pt-1">
                                         <h3 className="text-xl font-bold text-black">{step.title}</h3>
                                         <p className="mt-2 text-gray-600">{step.description}</p>
@@ -246,14 +247,14 @@ const LandingAssistant: React.FC = () => {
                             ))}
                         </div>
                         <div className="flex justify-center md:justify-end">
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Empezar ahora</button>
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Empezar ahora</button>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Stats Section */}
-            <section className="bg-yellow-100 py-12">
+            <section className="bg-blue-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+150</p><p className="mt-2 text-base text-gray-800">Estudiantes</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">$27</p><p className="mt-2 text-base text-gray-800">Ingreso Promedio por tarea</p></div>
@@ -283,7 +284,7 @@ const LandingAssistant: React.FC = () => {
                                 <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4">
                                     <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
                                     <div className="flex items-center mt-6">
-                                        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-xl font-bold text-yana-yellow">
+                                        <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl font-bold text-[#00B8DB]">
                                             {testimonial.name.charAt(0)}
                                         </div>
                                         <div className="ml-4">
@@ -301,7 +302,7 @@ const LandingAssistant: React.FC = () => {
             {/* Requisitos Section */}
             <section className="py-20 lg:py-24 bg-[#F7F7F7]">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">Qué necesitas para <span className="text-yana-yellow">unirte</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">Qué necesitas para <span className="text-[#00B8DB]">unirte</span></h2>
                     <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">Buscamos a los mejores estudiantes de Ecuador para garantizar la calidad de nuestro servicio. Estos son los requisitos para formar parte de nuestra comunidad de asistentes.</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
                         {requirements.map((req, index) => (
@@ -330,12 +331,12 @@ const LandingAssistant: React.FC = () => {
             <section className="py-20 lg:py-24">
                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                       <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                          <h2 className="text-3xl font-bold text-yana-yellow">¿Listo para empezar a ganar?</h2>
+                          <h2 className="text-3xl font-bold text-[#00B8DB]">¿Listo para empezar a ganar?</h2>
                           <p className="mt-4 max-w-2xl mx-auto text-gray-600">
                              Únete a nuestra comunidad de asistentes académicos en Ecuador y convierte tu conocimiento en ingresos. El registro es rápido y sencillo.
                           </p>
                           <div className="mt-8">
-                              <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">
+                              <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">
                                   Regístrate como asistente
                               </button>
                            </div>
@@ -351,9 +352,9 @@ const LandingAssistant: React.FC = () => {
                             <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
-                            <a href="#" className="hover:text-yana-yellow"><InstagramIcon /></a>
-                            <a href="#" className="hover:text-yana-yellow"><FacebookIcon /></a>
-                            <a href="#" className="hover:text-yana-yellow"><TikTokIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><FacebookIcon /></a>
+                            <a href="#" className="hover:text-[#00B8DB]"><TikTokIcon /></a>
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">

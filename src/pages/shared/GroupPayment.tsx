@@ -77,7 +77,7 @@ const GroupPayment = () => {
                     <span className="text-sm font-semibold">Integrantes</span>
                     <button 
                         onClick={() => navigator.clipboard.writeText(window.location.href)}
-                        className="flex items-center gap-1.5 bg-yana-yellow text-white text-xs px-3 py-1.5 rounded-md"
+                        className="flex items-center gap-1.5 bg-[#00B8DB] text-white text-xs px-3 py-1.5 rounded-md"
                     >
                         Link de pago <LinkIcon size={14} />
                     </button>
@@ -101,7 +101,7 @@ const GroupPayment = () => {
                 <div className="mt-12">
                     <button 
                         onClick={() => navigate(`/payment/transfer/group/${groupId}`)}
-                        className="w-full bg-yana-yellow text-white py-4 rounded-full font-medium"
+                        className="w-full bg-[#00B8DB] text-white py-4 rounded-full font-medium"
                     >
                         Pagar mi cuota
                     </button>
