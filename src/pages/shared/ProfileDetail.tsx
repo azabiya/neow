@@ -204,14 +204,14 @@ const ProfileDetail = () => {
                             </div>
                             <div className="flex flex-col sm:flex-row gap-3">
                                 <input type="file" ref={fileInputRef} onChange={handleFileChange} accept="image/*" hidden />
-                                <button onClick={handleUploadClick} className="bg-yana-yellow text-white text-sm px-5 py-2 rounded-lg font-semibold">Subir Foto</button>
+                                <button onClick={handleUploadClick} className="bg-primary text-white text-sm px-5 py-2 rounded-lg font-semibold">Subir Foto</button>
                                 <button onClick={handleRemovePhoto} className="text-sm text-red-500 border border-red-500 px-5 py-2 rounded-lg font-semibold">Eliminar</button>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 gap-y-6">
                             <div>
                                 <label className="text-sm text-gray-600">Nombre:</label>
-                                <input type="text" name="full_name" value={profile?.full_name || ''} onChange={(e) => handleInputChange(e, 'profile')} className="w-full mt-1 p-2 border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow" />
+                                <input type="text" name="full_name" value={profile?.full_name || ''} onChange={(e) => handleInputChange(e, 'profile')} className="w-full mt-1 p-2 border-b-2 border-gray-200 focus:outline-none focus:border-primary" />
                             </div>
                              <div>
                                 <label className="text-sm text-gray-600">Email:</label>
@@ -219,11 +219,11 @@ const ProfileDetail = () => {
                             </div>
                             <div>
                                 <label className="text-sm text-gray-600">Teléfono:</label>
-                                <input type="text" name="phone" value={profile?.phone || ''} onChange={(e) => handleInputChange(e, 'profile')} className="w-full mt-1 p-2 border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow" />
+                                <input type="text" name="phone" value={profile?.phone || ''} onChange={(e) => handleInputChange(e, 'profile')} className="w-full mt-1 p-2 border-b-2 border-gray-200 focus:outline-none focus:border-primary" />
                             </div>
                             <div>
                                 <label className="text-sm text-gray-600">Contraseña:</label><br />
-                                <button onClick={() => navigate('/change-password')} className="text-yana-yellow font-semibold mt-1">Cambiar contraseña</button>
+                                <button onClick={() => navigate('/change-password')} className="text-primary font-semibold mt-1">Cambiar contraseña</button>
                             </div>
                         </div>
                     </section>
@@ -256,7 +256,7 @@ const ProfileDetail = () => {
                     </section>
 
                     <div className="mt-12 flex justify-end">
-                        <button onClick={handleSaveChanges} className="bg-yana-yellow text-white py-3 px-8 rounded-full font-semibold">
+                        <button onClick={handleSaveChanges} className="bg-primary text-white py-3 px-8 rounded-full font-semibold">
                             Guardar Cambios
                         </button>
                     </div>

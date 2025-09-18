@@ -42,7 +42,7 @@ const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove 
                 </div>
             ))}
         </div>
-        <button onClick={() => onAdd(criterion)} className="flex items-center gap-2 text-yana-yellow mt-6 font-medium text-sm">
+        <button onClick={() => onAdd(criterion)} className="flex items-center gap-2 text-primary mt-6 font-medium text-sm">
             <PlusCircle size={20} />
             Añadir nuevo rango de precios
         </button>
@@ -224,7 +224,7 @@ const ServicePricing = () => {
                 <button onClick={() => navigate('/service-details')} className="border border-gray-400 text-gray-700 py-3 px-8 rounded-full font-semibold flex items-center justify-center gap-2">
                     <ArrowLeft size={20} /> Descartar
                 </button>
-                <button onClick={handleSaveChanges} className="bg-yana-yellow text-white py-3 px-8 rounded-full font-semibold" disabled={saving}>
+                <button onClick={handleSaveChanges} className="bg-primary text-white py-3 px-8 rounded-full font-semibold" disabled={saving}>
                     {saving ? 'Guardando...' : 'Guardar Cambios'}
                 </button>
             </footer>

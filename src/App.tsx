@@ -66,7 +66,7 @@ const Sidebar = ({ userRole }: { userRole: string }) => {
 
     const getLinkClass = ({ isActive }: { isActive: boolean }) =>
         `flex items-center gap-4 p-3 rounded-lg transition-colors text-base font-medium ${
-        isActive ? 'text-yana-yellow bg-yellow-50' : 'text-gray-700 hover:bg-gray-100'
+        isActive ? 'text-primary bg-yellow-50' : 'text-gray-700 hover:bg-gray-100'
         }`;
 
     return (

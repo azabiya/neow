@@ -92,7 +92,7 @@ const PaymentHistory = () => {
                             <div key={payment.id} className="bg-white p-4 rounded-2xl border border-gray-200 flex items-center hover:border-yellow-400 transition-colors">
                                 <button 
                                     onClick={() => handleViewReceipt(payment.receipt?.file_path)}
-                                    className="w-12 h-12 bg-yellow-100 text-yana-yellow rounded-full flex items-center justify-center mr-4 flex-shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-12 h-12 bg-yellow-100 text-primary rounded-full flex items-center justify-center mr-4 flex-shrink-0 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                                     disabled={!payment.receipt}
                                 >
                                     <FileText size={24} />

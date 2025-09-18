@@ -78,7 +78,7 @@ const Login = ({ setUserRole }) => {
                   placeholder="Correo Electrónico"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow"
+                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -91,7 +91,7 @@ const Login = ({ setUserRole }) => {
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow"
+                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-primary"
                     required
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400">
@@ -99,7 +99,7 @@ const Login = ({ setUserRole }) => {
                   </button>
                 </div>
               </div>
-              <button type="submit" className="w-full bg-yana-yellow text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
+              <button type="submit" className="w-full bg-primary text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
                 {loading ? 'Iniciando...' : 'Iniciar sesión'}
               </button>
             </form>
@@ -107,7 +107,7 @@ const Login = ({ setUserRole }) => {
             <div className="text-center mt-4">
               <p className="text-gray-600">
                 ¿Aún no tienes cuenta?{' '}
-                <Link to="/register" className="font-semibold text-yana-yellow">
+                <Link to="/register" className="font-semibold text-primary">
                   Regístrate
                 </Link>
               </p>
