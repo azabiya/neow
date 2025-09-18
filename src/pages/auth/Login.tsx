@@ -59,7 +59,7 @@ const Login = ({ setUserRole }) => {
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm">
           <header className="text-center pt-12 pb-10">
-            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-12 mx-auto" />
+            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-12 mx-auto" />
           </header>
 
           <main className="w-full flex flex-col gap-8">
@@ -117,7 +117,7 @@ const Login = ({ setUserRole }) => {
       </div>
       
       <footer className="absolute bottom-6 left-6 text-gray-500 text-sm hidden md:block">
-        © 2025 YANA MAKI. Todos los derechos reservados.
+        © 2025 IntiHelp. Todos los derechos reservados.
       </footer>
     </div>
   );

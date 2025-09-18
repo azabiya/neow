@@ -72,7 +72,7 @@ const Sidebar = ({ userRole }: { userRole: string }) => {
     return (
         <div className="h-full flex flex-col p-6 bg-white border-r border-gray-200">
             <div className="mb-10">
-                <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
+                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
             </div>
             <nav className="flex-1 flex flex-col gap-2">
                 {mainOptions.map((option) => (

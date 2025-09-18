@@ -7,7 +7,7 @@ const PaymentSuccess = () => {
   return (
     <div className="flex flex-col min-h-screen max-w-md mx-auto bg-white p-6 font-inter">
       <header className="text-center pt-8 pb-10">
-        <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 mx-auto" />
+        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
       </header>
 
       <main className="flex-grow flex flex-col items-center justify-center">
@@ -30,7 +30,7 @@ const PaymentSuccess = () => {
       </main>
 
       <footer className="text-center text-gray-500 text-sm py-6">
-        © 2025 YANA MAKI. Todos los derechos reservados.
+        © 2025 IntiHelp. Todos los derechos reservados.
       </footer>
     </div>
   );

@@ -253,9 +253,9 @@ const Register = () => {
     return (
         <div className="flex flex-col min-h-screen p-6 bg-white relative md:items-center md:justify-center">
             <div className="w-full md:max-w-md flex flex-col flex-grow md:flex-grow-0">
-                <header className="text-center pt-8 md:pt-0 pb-8"> <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-12 mx-auto" /> </header>
+                <header className="text-center pt-8 md:pt-0 pb-8"> <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-12 mx-auto" /> </header>
                 <main className="flex-grow flex flex-col items-center w-full">
-                    <div className="w-full text-center mb-8"> <h2 className="text-3xl font-normal text-black">¡Únete a YANA MAKI!</h2> </div>
+                    <div className="w-full text-center mb-8"> <h2 className="text-3xl font-normal text-black">¡Únete a IntiHelp!</h2> </div>
                     <div className="w-full mb-8">
                         <p className="text-sm text-gray-600 mb-2 text-center">Paso {step} de {totalSteps}</p>
                         <div className="w-full bg-gray-200 rounded-full h-1.5">

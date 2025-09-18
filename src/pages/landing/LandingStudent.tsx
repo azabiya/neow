@@ -1,11 +1,10 @@
 // src/pages/landing/LandingStudent.tsx
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
-import { supabase } from '../../supabaseClient'; // Import supabase client
+import { supabase } from '../../supabaseClient';
 
 // --- ICONOS (Sin cambios) ---
-
 const QualityIcon = () => (
     <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -58,7 +57,6 @@ const TikTokIcon = () => (
     </svg>
 );
 
-
 // --- COMPONENTE ACORDEÓN (FAQ) ---
 const FaqItem = ({ question, answer }: { question: string, answer: string }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -84,10 +82,10 @@ const FaqItem = ({ question, answer }: { question: string, answer: string }) => 
 // --- COMPONENTE PRINCIPAL ---
 const LandingStudent: React.FC = () => {
     const navigate = useNavigate();
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [stats, setStats] = useState({ completedTasks: 0, availableAssistants: 0, satisfactionRate: 0 });
-    const [testimonials, setTestimonials] = useState([]);
-    const carouselRef = useRef<HTMLDivElement>(null);
+    const [testimonials, setTestimonials] = useState<any[]>([]);
+    const [currentIndex, setCurrentIndex] = useState(1);
+    const [transitionEnabled, setTransitionEnabled] = useState(true);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
@@ -111,56 +109,77 @@ const LandingStudent: React.FC = () => {
         fetchStats();
 
         setTestimonials([
-            { quote: '"Me salvaron el semestre con un ensayo de redacción. El asistente de la ULEAM captó al toque lo que necesitaba. ¡Full recomendado!"', name: 'Anthony Intriago', role: 'Estudiante de la ULEAM' },
-            { quote: '"Tenía un proyecto de cálculo súper yuca y aquí en YANA MAKI encontré un asistente de la PUCE que me explicó todo paso a paso. ¡Increíble servicio!"', name: 'Julia Espinoza', role: 'Estudiante de la PUCE' },
-            { quote: '"La plataforma es súper fácil de usar. Pude encargar una tarea de programación y el resultado fue 10/10. ¡Gracias, YANA MAKI!"', name: 'Doanny Loor', role: 'Estudiante de la UNEMI' },
-            { quote: '"Siempre me ayudan con mis trabajos de la U. Es un alivio tener a alguien que te dé una mano cuando estás a full."', name: 'Roger Alava', role: 'Estudiante de la UNEMI' },
+            { quote: '"Me gustó que se puede organizar trabajos grupales y hacer que cada integrante envié su parte. ¡Full recomendado para trabajos grupales!"', name: 'Anthony Intriago', role: 'Estudiante de la ULEAM' },
+            { quote: '"Los resultados siempre son buenos y si no te convencen te ayudan para que te hagan otro trabajo"', name: 'Julia Espinoza', role: 'Estudiante de la PUCE' },
+            { quote: '"La plataforma es súper fácil de usar. Pude encargar un ensayo y el resultado fue 10/10."', name: 'Doanny Loor', role: 'Estudiante, PUCE' },
+            { quote: '"Lo he probado ya 3 veces y hasta ahora todo ha estado muy bien. Es muy útil para cuándo estás a full y no tienes tiempo"', name: 'Roger Alava', role: 'Estudiante, UNEMI' },
         ]);
     }, []);
+    
+    const getItemsPerPage = useCallback(() => window.innerWidth >= 768 ? 3 : 1, []);
+    const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
 
+    useEffect(() => {
+        const handleResize = () => setItemsPerPage(getItemsPerPage());
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [getItemsPerPage]);
+    
+    const loopedTestimonials = useMemo(() => {
+        if (testimonials.length === 0 || testimonials.length <= itemsPerPage) return testimonials;
+        const firstItem = testimonials[0];
+        const lastItem = testimonials[testimonials.length - 1];
+        return [lastItem, ...testimonials, firstItem];
+    }, [testimonials, itemsPerPage]);
+
+    const handleNext = useCallback(() => {
+        setCurrentIndex(prev => prev + 1);
+        if (!transitionEnabled) setTransitionEnabled(true);
+    }, [transitionEnabled]);
+
+    const handlePrev = () => {
+        setCurrentIndex(prev => prev - 1);
+        if (!transitionEnabled) setTransitionEnabled(true);
+    };
+    
+    const handleTransitionEnd = () => {
+        if (currentIndex <= 0) {
+            setTransitionEnabled(false);
+            setCurrentIndex(testimonials.length);
+        } else if (currentIndex >= testimonials.length + 1) {
+            setTransitionEnabled(false);
+            setCurrentIndex(1);
+        }
+    };
+
+    const startAutoPlay = useCallback(() => {
+        if (intervalRef.current) clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(() => {
+            handleNext();
+        }, 5000);
+    }, [handleNext]);
+
+    useEffect(() => {
+        if (testimonials.length > itemsPerPage) {
+            startAutoPlay();
+        }
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [testimonials.length, itemsPerPage, startAutoPlay]);
+    
     const steps = [
-        { title: 'Solicitas', description: 'Describe tu tarea, sube los archivos necesarios y elige al asistente perfecto para ti en Ecuador.' },
+        { title: 'Solicitas', description: 'Describe tu tarea, sube los archivos necesarios y elige al asistente perfecto para ti.' },
         { title: 'Creamos', description: 'Tu asistente se pondrá a trabajar, manteniéndote al día con avances si es necesario.' },
         { title: 'Recibes', description: 'Recibe tu tarea completada en el tiempo acordado, lista para revisar y aprobar.' }
     ];
     
     const faqItems = [
-        { q: "¿Qué pasa si no recibo mi tarea a tiempo?", a: "Nuestra prioridad es la puntualidad. Si un asistente tiene un problema, nuestro equipo de soporte en Ecuador intervendrá de inmediato para reasignar tu tarea o encontrar una solución, garantizando que cumplas con tu fecha límite." },
+        { q: "¿Qué pasa si no recibo mi tarea a tiempo?", a: "Nuestra prioridad es la puntualidad. Si tu asistente no cumple con la tarea a tiempo se te devolverá el 100% de tu dinero. Te recomendamos fijar una fecha de entrega anterior a tu fecha de presentación, para que puedas reasignar la tarea." },
         { q: "¿Puedo solicitar revisiones en mi tarea?", a: "¡Claro que sí! Tienes derecho a solicitar revisiones si el trabajo entregado no cumple con los requisitos iniciales. Queremos que quedes 100% satisfecho con el resultado." },
-        { q: "¿Son seguros mis datos y pagos?", a: "Totalmente. Usamos pasarelas de pago seguras y tu información es confidencial. El pago solo se libera al asistente cuando tú apruebas la tarea final." },
-        { q: "¿Cómo eligen a los asistentes académicos?", a: "Tenemos un proceso de selección riguroso para nuestros asistentes en Ecuador. Verificamos su expediente académico y sus habilidades para asegurar que solo los mejores estudiantes te ayuden." },
-        { q: "¿Qué materias y tipos de tareas cubren?", a: "Cubrimos una amplia gama de carreras universitarias en Ecuador, desde ingenierías y derecho hasta comunicación y artes. Puedes encargar ensayos, proyectos, presentaciones, ¡y mucho más!" }
+        { q: "¿Son seguros mis datos y pagos?", a: "Totalmente. Tu pago solo se libera al asistente cuando tú apruebas la tarea final. si no es así se te devuelve tu dinero." },
+        { q: "¿Qué materias y tipos de tareas cubren?", a: "Cubrimos una amplia gama de carreras universitarias en Ecuador, desde ingenierías y derecho hasta comunicación y carrera médicas Puedes encargar ensayos, proyectos, presentaciones, ¡y mucho más!" }
     ];
-
-    const itemsPerPage = 3;
-
-    const startAutoPlay = useCallback(() => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            setCurrentIndex(prevIndex => (prevIndex + 1) % (testimonials.length || 1));
-        }, 5000);
-    }, [testimonials.length]);
-
-    const stopAutoPlay = () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex(prevIndex => (prevIndex - 1 + testimonials.length) % testimonials.length);
-        startAutoPlay();
-    };
-
-    const handleNext = () => {
-        setCurrentIndex(prevIndex => (prevIndex + 1) % testimonials.length);
-        startAutoPlay();
-    };
-    
-    useEffect(() => {
-        if (testimonials.length > 0) {
-            startAutoPlay();
-        }
-        return () => stopAutoPlay();
-    }, [testimonials, startAutoPlay]);
 
     return (
         <div className="min-h-screen bg-white font-inter text-black overflow-x-hidden">
@@ -173,7 +192,7 @@ const LandingStudent: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/assistants" className="text-white font-medium hover:text-gray-200 transition-colors">Asistente</a>
                             </nav>
@@ -189,7 +208,7 @@ const LandingStudent: React.FC = () => {
                         <span className="text-white">ENCARGA TAREAS</span><br/>
                         <span className="text-black">100% HUMANAS</span>
                     </h2>
-                    <p className="mt-4 max-w-3xl text-white text-sm md:text-base">La plataforma #1 para estudiantes universitarios en Ecuador. Conecta con los mejores asistentes y libera tu tiempo.</p>
+                    <p className="mt-4 max-w-3xl text-white text-sm md:text-base">La plataforma #1 para estudiantes universitarios en Ecuador. Conecta con los mejores asistentes y ahorra tu tiempo.</p>
                     <div className="mt-20 w-full max-w-[800px] relative">
                         <input type="text" placeholder="¿Qué tarea quieres realizar?" className="w-full pl-6 pr-16 py-4 bg-white/20 text-white placeholder-white/80 border border-white/80 rounded-full focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm shadow-lg" />
                         <button onClick={() => navigate('/register')} className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors focus:outline-none"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"></path></svg></button>
@@ -197,19 +216,19 @@ const LandingStudent: React.FC = () => {
                 </div>
             </section>
             
-            {/* Qué es YANA MAKI? Section */}
+            {/* Qué es IntiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">IntiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es una plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Encargar tareas nunca fue tan fácil y seguro!</p>
                     <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>
 
-            {/* Por qué usar YANA MAKI? Section */}
+            {/* Por qué usar IntiHelp? Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#00B8DB]">YANA MAKI?</span></h2></div>
+                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#00B8DB]">IntiHelp?</span></h2></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                             <div className="flex flex-col items-center">
@@ -225,7 +244,7 @@ const LandingStudent: React.FC = () => {
                              <div className="flex flex-col items-center">
                                 <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
-                                <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea.</p>
+                                <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea sino ¡Te dolvemos tu dinero!.</p>
                             </div>
                         </div>
                         <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
@@ -271,7 +290,7 @@ const LandingStudent: React.FC = () => {
             <section className="py-20 lg:py-24">
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-black">Qué dicen nuestros panas:</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-black">Qué dicen nuestros clientes:</h2>
                         {testimonials.length > itemsPerPage && (
                             <div className="flex gap-4">
                                 <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
@@ -283,11 +302,18 @@ const LandingStudent: React.FC = () => {
                             </div>
                         )}
                     </div>
-                     <div className="overflow-hidden" ref={carouselRef}>
-                        <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${(currentIndex * 100) / (testimonials.length > 0 ? itemsPerPage : 1)}%)` }}>
-                            {testimonials.length > 0 ? testimonials.map((testimonial, index) => (
-                                <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4">
-                                    <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
+                     <div className="overflow-hidden">
+                        <div
+                           className="flex"
+                           style={{
+                               transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                               transition: transitionEnabled ? `transform ${'0.5s'} ease-in-out` : 'none'
+                           }}
+                           onTransitionEnd={handleTransitionEnd}
+                        >
+                            {loopedTestimonials.map((testimonial, index) => (
+                                <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4" style={{minWidth: `${100/itemsPerPage}%`}}>
+                                    <p className="text-gray-700 italic flex-grow h-24">"{testimonial.quote}"</p>
                                     <div className="flex items-center mt-6">
                                         <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl font-bold text-[#00B8DB]">
                                             {testimonial.name.charAt(0)}
@@ -298,7 +324,7 @@ const LandingStudent: React.FC = () => {
                                         </div>
                                     </div>
                                 </div>
-                            )) : <p className="text-center w-full">Aún no hay testimonios. ¡Sé el primero en compartir tu experiencia!</p>}
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -320,7 +346,7 @@ const LandingStudent: React.FC = () => {
                      <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
                          <h2 className="text-3xl font-bold text-[#00B8DB]">¿Listo para mejorar tus calificaciones?</h2>
                          <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                           Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con YANA MAKI. El registro es gratis y toma menos de un minuto.
+                           Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
                          </p>
                          <div className="mt-8">
                             <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">
@@ -336,7 +362,7 @@ const LandingStudent: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
@@ -345,7 +371,7 @@ const LandingStudent: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 YANA MAKI. Todos los derechos reservados.</p>
+                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

@@ -2,107 +2,54 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
-import { supabase } from '../../supabaseClient'; // Import supabase client
+import { supabase } from '../../supabaseClient';
 
 // --- ICONOS (Sin cambios) ---
-
-
-const MoneyIcon = () => (
-    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-const FlexibilityIcon = () => (
-    <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-const GrowthIcon = () => (
-     <svg className="text-[#00B8DB]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M15 3H21V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-const RequirementIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 15L11 17L15 13" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-
-const ChevronDownIcon = ({ className }: { className?: string }) => (
-    <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 9L12 15L18 9" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-const InstagramIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current">
-        <rect x="2" y="2" width="20" height="20" rx="5" strokeWidth="2"/>
-        <path d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z" strokeWidth="2"/>
-        <path d="M17.5 6.5h.01" strokeWidth="2" strokeLinecap="round"/>
-    </svg>
-);
-
-const FacebookIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current">
-        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-);
-
-const TikTokIcon = () => (
-     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current">
-        <path d="M16 4H12V12A4 4 0 1016 16V4Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 4V16A4 4 0 118 12H12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-);
-
+const MoneyIcon=()=>(<svg className="text-[#00B8DB]"width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const FlexibilityIcon=()=>(<svg className="text-[#00B8DB]"width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M12 6V12L16 14"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const GrowthIcon=()=>(<svg className="text-[#00B8DB]"width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M15 3H21V9"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M10 14L21 3"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const RequirementIcon=()=>(<svg width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"stroke="#111827"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M9 15L11 17L15 13"stroke="#111827"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const ChevronDownIcon=({className}:{className?:string})=>(<svg className={className}width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M6 9L12 15L18 9"stroke="black"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const InstagramIcon=()=>(<svg width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"className="stroke-current"><rect x="2"y="2"width="20"height="20"rx="5"strokeWidth="2"/><path d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z"strokeWidth="2"/><path d="M17.5 6.5h.01"strokeWidth="2"strokeLinecap="round"/></svg>);
+const FacebookIcon=()=>(<svg width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"className="stroke-current"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
+const TikTokIcon=()=>(<svg width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"className="stroke-current"><path d="M16 4H12V12A4 4 0 1016 16V4Z"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M12 4V16A4 4 0 118 12H12"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);
 
 // --- COMPONENTE ACORDEÓN (FAQ) ---
 const FaqItem = ({ question, answer }: { question: string, answer: string }) => {
     const [isOpen, setIsOpen] = useState(false);
-    return (
+    return(
         <div className="border border-[#E0DDDD] rounded-lg">
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex justify-between items-center p-4 text-left"
-            >
+            <button onClick={()=>setIsOpen(!isOpen)}className="w-full flex justify-between items-center p-4 text-left">
                 <span className="font-semibold text-black">{question}</span>
-                <ChevronDownIcon className={`w-6 h-6 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                <ChevronDownIcon className={`w-6 h-6 transition-transform ${isOpen ? 'rotate-180':''}`}/>
             </button>
-            {isOpen && (
-                <div className="px-4 pb-4 text-gray-600">
-                    <p>{answer}</p>
-                </div>
-            )}
+            {isOpen && (<div className="px-4 pb-4 text-gray-600"><p>{answer}</p></div>)}
         </div>
     );
 };
 
-
 // --- COMPONENTE PRINCIPAL ---
 const LandingAssistant: React.FC = () => {
     const navigate = useNavigate();
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [testimonials, setTestimonials] = useState([]);
-    const carouselRef = useRef<HTMLDivElement>(null);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-     useEffect(() => {
-         setTestimonials([
-            { quote: '"Ser asistente en YANA MAKI me ha permitido usar mis conocimientos para ganar un dinero extra sin descuidar mis estudios en la ESPOL. ¡Es genial!"', name: 'Carlos Zambrano', role: 'Asistente de Ingeniería' },
-            { quote: '"La plataforma es súper fácil de usar y siempre hay nuevas oportunidades. Me encanta la flexibilidad que ofrece para nosotros los estudiantes en Ecuador."', name: 'Mónica Velez', role: 'Asistente de Arquitectura' },
-            { quote: '"He mejorado mis propias habilidades académicas ayudando a otros. Además, los pagos son puntuales y seguros, directo a mi cuenta del Pichincha."', name: 'Sofía López', role: 'Asistente de Comunicaciones' },
-         ]);
-    }, []);
+    // FIX 1: Initialize testimonials directly in state.
+    const [testimonials] = useState([
+        { quote: '"Súper flexible, realizo las tareas que quiero según mi tiempo libre y gano bastante bien"', name: 'Mateo Torres', role: 'Asistente (ULEAM)' },
+        { quote: '"Hay bastante demanda y siempre tengo encargos, por lo que se puede generan un buen ingreso extra. La recomiendo bastante"', name: 'Angie Chicaiza', role: 'Asistente (UCE)' },
+        { quote: '"Antes realizaba tareas por mi cuenta pero tenía problemas para que me pagaran, aquí recibo mis pagos apenas entrego la tarea."', name: 'Rafael Astudillo', role: 'Asistente (UG)' },
+        { quote: '"Me decidí a probarla y ha sido muuy útil, con lo que gano aquí cubro mis gastos de la uni"', name: 'Andrea Paz', role: 'Asistente (UNEMI)' },
+    ]);
+    
+    // State for Carousel
+    const [currentIndex, setCurrentIndex] = useState(1);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const itemsPerPage = 3;
+
+    // FIX 2: Create a seamless loop by cloning items.
+    const displayedTestimonials = testimonials.length > 0
+        ? [testimonials[testimonials.length - 1], ...testimonials, testimonials[0]]
+        : [];
 
     const steps = [
         { title: 'Regístrate y Completa tu Perfil', description: 'Únete a nuestra comunidad de asistentes en Ecuador y configura tus áreas de especialización y tarifas.' },
@@ -111,51 +58,61 @@ const LandingAssistant: React.FC = () => {
     ];
 
     const requirements = [
-        { text: "Ser estudiante universitario activo en Ecuador." },
-        { text: "Excelencia académica comprobada." },
+        { text: "Educación Superior" },
         { text: "Responsabilidad y compromiso." },
-        { text: "Buenas habilidades de comunicación." },
-        { text: "Acceso a internet y herramientas digitales." },
-        { text: "Cuenta bancaria en Ecuador para recibir pagos." },
+        { text: "Tener cuenta bancaria (para recibir pagos)" },
     ];
 
     const faqItems = [
-        { q: "¿Cómo y cuándo recibiré mis pagos?", a: "Los pagos se procesan semanalmente a través de transferencia bancaria a la cuenta que registres en tu perfil. Recibirás el pago una vez que el estudiante apruebe la tarea que completaste." },
+        { q: "¿Cómo y cuándo recibiré mis pagos?", a: "Una vez que el estudiante apruebe la tarea que completaste recibirás tu pago a través de una transferencia bancaria a la cuenta que registres en tu perfil." },
         { q: "¿Puedo rechazar una solicitud de tarea?", a: "Sí, tienes total libertad de aceptar o rechazar las solicitudes de tareas que recibas. Te recomendamos aceptar solo aquellas que se ajusten a tus conocimientos y disponibilidad." },
-        { q: "¿Qué tipo de soporte ofrece YANA MAKI a los asistentes?", a: "Contamos con un equipo de soporte local en Ecuador disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
+        { q: "¿Qué tipo de soporte ofrece IntiHelp a los asistentes?", a: "Contamos con un equipo de soporte disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
         { q: "¿Cómo configuro mis precios por las tareas?", a: "Dentro de tu perfil, podrás establecer tus tarifas basadas en criterios como número de páginas, complejidad o porcentaje de IA permitido. Esto te da control total sobre tus ganancias." },
-        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. YANA MAKI se adapta a tu horario de estudiante, no al revés." }
+        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. IntiHelp se adapta a tu horario de estudiante, no al revés." }
     ];
 
-    const itemsPerPage = 3;
+    // Carousel Logic
+    const handleNext = useCallback(() => {
+        if (!isTransitioning) return;
+        setCurrentIndex(prev => prev + 1);
+    }, [isTransitioning]);
+
+    const handlePrev = () => {
+        if (!isTransitioning) return;
+        setCurrentIndex(prev => prev - 1);
+    };
 
     const startAutoPlay = useCallback(() => {
         if (intervalRef.current) clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            setCurrentIndex(prevIndex => (prevIndex + 1) % (testimonials.length || 1));
-        }, 5000);
-    }, [testimonials.length]);
+        intervalRef.current = setInterval(handleNext, 5000);
+    }, [handleNext]);
 
-    const stopAutoPlay = () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex(prevIndex => (prevIndex - 1 + testimonials.length) % testimonials.length);
-        startAutoPlay();
-    };
-
-    const handleNext = () => {
-        setCurrentIndex(prevIndex => (prevIndex + 1) % testimonials.length);
-        startAutoPlay();
-    };
-    
     useEffect(() => {
-        if (testimonials.length > 0) {
+        if (testimonials.length > itemsPerPage) {
             startAutoPlay();
         }
-        return () => stopAutoPlay();
-    }, [testimonials, startAutoPlay]);
+        return () => {
+            if (intervalRef.current) clearInterval(intervalRef.current);
+        };
+    }, [testimonials.length, startAutoPlay]);
+
+    const handleTransitionEnd = () => {
+        if (currentIndex === 0) {
+            setIsTransitioning(false);
+            setCurrentIndex(testimonials.length);
+        } else if (currentIndex === testimonials.length + 1) {
+            setIsTransitioning(false);
+            setCurrentIndex(1);
+        }
+    };
+
+    useEffect(() => {
+        if (!isTransitioning) {
+            setTimeout(() => {
+                setIsTransitioning(true);
+            }, 50);
+        }
+    }, [currentIndex, isTransitioning]);
 
     return (
         <div className="min-h-screen bg-white font-inter text-black overflow-x-hidden">
@@ -168,7 +125,7 @@ const LandingAssistant: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/" className="text-white font-medium hover:text-gray-200 transition-colors">Estudiante</a>
                             </nav>
@@ -191,29 +148,29 @@ const LandingAssistant: React.FC = () => {
                     </div>
                 </div>
             </section>
-             {/* Qué es YANA MAKI? Section */}
+             {/* Qué es IntiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">IntiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es una plataforma creada para ayudar a los estudiantes del Ecuador. Te permitimos aprovechar tu tiempo libre para gener ingresos ayudando a otros con sus tareas. </p>
                     <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>           
             {/* Beneficios Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">YANA MAKI</span></h2></div>
+                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">IntiHelp</span></h2></div>
                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                              <div className="flex flex-col items-center">
                                  <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><MoneyIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">GANA DINERO EXTRA</h3>
-                                 <p className="mt-2 text-sm text-gray-500">Recibe pagos seguros por cada tarea que completes en tu cuenta bancaria de Ecuador.</p>
+                                 <p className="mt-2 text-sm text-gray-500">Recibe pagos seguros por cada tarea que completes. ¡Tú fijas los precios!</p>
                              </div>
                               <div className="flex flex-col items-center">
                                  <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><FlexibilityIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">HORARIO FLEXIBLE</h3>
-                                 <p className="mt-2 text-sm text-gray-500">Trabaja cuándo y dónde quieras, adaptado a tu vida estudiantil.</p>
+                                 <p className="mt-2 text-sm text-gray-500">Acepta solo los trabajos que tú quieras y que se adapten a tus horarios.</p>
                              </div>
                               <div className="flex flex-col items-center">
                                  <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><GrowthIcon /></div>
@@ -267,21 +224,27 @@ const LandingAssistant: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-black">Qué dicen nuestros asistentes:</h2>
-                        {testimonials.length > itemsPerPage && (
-                            <div className="flex gap-4">
-                                <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                </button>
-                                <button onClick={handleNext} className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                                </button>
-                            </div>
-                        )}
+                        {/* FIX 3: Added arrows to assistant carousel */}
+                        <div className="flex gap-4">
+                            <button onClick={handlePrev} className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-colors">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 18L9 12L15 6" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                            <button onClick={handleNext} className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                            </button>
+                        </div>
                     </div>
-                     <div className="overflow-hidden" ref={carouselRef}>
-                        <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${(currentIndex * 100) / (testimonials.length > 0 ? itemsPerPage : 1)}%)` }}>
-                            {testimonials.length > 0 ? testimonials.map((testimonial, index) => (
-                                <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4">
+                     <div className="overflow-hidden">
+                        <div 
+                            className="flex"
+                            onTransitionEnd={handleTransitionEnd}
+                            style={{ 
+                                transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                                transition: isTransitioning ? 'transform 0.5s ease-in-out' : 'none' 
+                            }}
+                        >
+                            {displayedTestimonials.map((testimonial, index) => (
+                                <div key={index} className="flex-shrink-0 w-full md:w-1/3 px-4">
                                     <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
                                     <div className="flex items-center mt-6">
                                         <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl font-bold text-[#00B8DB]">
@@ -293,7 +256,7 @@ const LandingAssistant: React.FC = () => {
                                         </div>
                                     </div>
                                 </div>
-                            )) : <p className="text-center w-full">Aún no hay testimonios. ¡Anímate a ser el primero!</p>}
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -349,7 +312,7 @@ const LandingAssistant: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
@@ -358,7 +321,7 @@ const LandingAssistant: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 YANA MAKI. Todos los derechos reservados.</p>
+                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>
