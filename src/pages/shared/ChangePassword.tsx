@@ -3,7 +3,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 
-const PasswordInput = ({ label, id, value, onChange }) => (
+interface PasswordInputProps {
+  label: string;
+  id: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const PasswordInput = ({ label, id, value, onChange }: PasswordInputProps) => (
     <div>
         <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
         <input 
@@ -29,7 +36,7 @@ const ChangePassword = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setPasswords(prev => ({ ...prev, [name]: value }));
     };

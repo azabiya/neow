@@ -178,7 +178,7 @@ const LandingStudent: React.FC = () => {
         { q: "¿Qué pasa si no recibo mi tarea a tiempo?", a: "Nuestra prioridad es la puntualidad. Si tu asistente no cumple con la tarea a tiempo se te devolverá el 100% de tu dinero. Te recomendamos fijar una fecha de entrega anterior a tu fecha de presentación, para que puedas reasignar la tarea." },
         { q: "¿Puedo solicitar revisiones en mi tarea?", a: "¡Claro que sí! Tienes derecho a solicitar revisiones si el trabajo entregado no cumple con los requisitos iniciales. Queremos que quedes 100% satisfecho con el resultado." },
         { q: "¿Son seguros mis datos y pagos?", a: "Totalmente. Tu pago solo se libera al asistente cuando tú apruebas la tarea final. si no es así se te devuelve tu dinero." },
-        { q: "¿Qué materias y tipos de tareas cubren?", a: "Cubrimos una amplia gama de carreras universitarias en Ecuador, desde ingenierías y derecho hasta comunicación y carrera médicas Puedes encargar ensayos, proyectos, presentaciones, ¡y mucho más!" }
+        { q: "¿Qué materias y tipos de tareas cubren?", a: "Cubrimos una amplia gama de carreras universitarias en Ecuador, desde ingenierías y derecho hasta comunicación y carreras médicas Puedes encargar ensayos, proyectos, presentaciones, ¡y mucho más!" }
     ];
 
     return (

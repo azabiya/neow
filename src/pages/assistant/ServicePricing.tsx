@@ -4,7 +4,38 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Trash2, PlusCircle } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 
-const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove }) => (
+// --- TYPE DEFINITIONS ---
+interface PriceItem {
+  id?: number;
+  min_value: string | number;
+  max_value: string | number;
+  cost: string | number;
+  criterion_type?: Criterion;
+  assistant_task_type_id?: string;
+}
+
+interface PricingData {
+  pages: PriceItem[];
+  ia: PriceItem[];
+  plagiarism: PriceItem[];
+}
+
+type Criterion = 'pages' | 'ia' | 'plagiarism';
+
+interface PriceRangeCardProps {
+  title: string;
+  data: PriceItem[];
+  criterion: Criterion;
+  onDataChange: (criterion: Criterion, index: number, field: keyof PriceItem, value: string) => void;
+  onAdd: (criterion: Criterion) => void;
+  onRemove: (criterion: Criterion, index: number) => void;
+}
+
+interface TaskType {
+  name: string;
+}
+
+const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove }: PriceRangeCardProps) => (
     <div className="bg-white rounded-2xl border border-gray-200 p-6">
         <h3 className="font-semibold text-black mb-4">{title}</h3>
         <div className="text-sm text-gray-600 grid grid-cols-10 gap-4 px-2 mb-2">
@@ -50,12 +81,12 @@ const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove 
 );
 
 const ServicePricing = () => {
-    const { serviceId } = useParams();
+    const { serviceId } = useParams<{ serviceId: string }>();
     const navigate = useNavigate();
-    const [taskType, setTaskType] = useState(null);
+    const [taskType, setTaskType] = useState<TaskType | null>(null);
     const [isEnabled, setIsEnabled] = useState(false);
-    const [pricing, setPricing] = useState({ pages: [], ia: [], plagiarism: [] });
-    const [assistantTaskTypeId, setAssistantTaskTypeId] = useState(null);
+    const [pricing, setPricing] = useState<PricingData>({ pages: [], ia: [], plagiarism: [] });
+    const [assistantTaskTypeId, setAssistantTaskTypeId] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
@@ -99,23 +130,22 @@ const ServicePricing = () => {
         fetchPricing();
     }, [serviceId]);
 
-    const handlePricingChange = (criterion, index, field, value) => {
-        setPricing(prev => ({
-            ...prev,
-            [criterion]: prev[criterion].map((item, i) => 
-                i === index ? { ...item, [field]: value } : item
-            )
-        }));
+    const handlePricingChange = (criterion: Criterion, index: number, field: keyof PriceItem, value: string) => {
+        setPricing(prev => {
+            const newValues = [...prev[criterion]];
+            newValues[index] = { ...newValues[index], [field]: value };
+            return { ...prev, [criterion]: newValues };
+        });
     };
     
-    const handleAddRow = (criterion) => {
+    const handleAddRow = (criterion: Criterion) => {
         setPricing(prev => ({
             ...prev,
             [criterion]: [...prev[criterion], { min_value: '', max_value: '', cost: '' }]
         }));
     };
 
-    const handleRemoveRow = (criterion, index) => {
+    const handleRemoveRow = (criterion: Criterion, index: number) => {
         setPricing(prev => ({
             ...prev,
             [criterion]: prev[criterion].filter((_, i) => i !== index)
@@ -174,8 +204,8 @@ const ServicePricing = () => {
             ...rest,
             assistant_task_type_id: currentAssistantTaskTypeId,
             cost: parseFloat(String(rest.cost).replace('$', '')) || 0,
-            min_value: parseInt(rest.min_value, 10) || 0,
-            max_value: parseInt(rest.max_value, 10) || 0,
+            min_value: parseInt(String(rest.min_value), 10) || 0,
+            max_value: parseInt(String(rest.max_value), 10) || 0,
         }));
     
         if (pricesToInsert.length > 0) {

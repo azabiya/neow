@@ -1,10 +1,7 @@
 // src/pages/shared/Help.tsx
-import { useNavigate } from 'react-router-dom';
 import { MessageSquare } from 'lucide-react';
 
 const Help = () => {
-    const navigate = useNavigate();
-
     return (
         <div className="bg-white min-h-full font-inter text-black p-6 md:p-10 flex flex-col">
             <header className="max-w-2xl">

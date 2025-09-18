@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
-import { supabase } from '../../supabaseClient';
 
 // --- ICONOS (Sin cambios) ---
 const MoneyIcon=()=>(<svg className="text-[#00B8DB]"width="24"height="24"viewBox="0 0 24 24"fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/><path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"/></svg>);

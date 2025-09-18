@@ -1,16 +1,68 @@
 // src/pages/student/CreateTask.tsx
 import { useState, useEffect, useRef } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, FileText, BarChart3, Repeat, Upload, X, Star, CheckCircle2, Filter, Paperclip, PlusCircle
 } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../../supabaseClient';
 
+// --- TYPE DEFINITIONS ---
+interface TaskType {
+  id: string;
+  name: string;
+  icon: keyof typeof iconMap;
+}
+
+interface Career {
+  id: string;
+  name: string;
+}
+
+interface Assistant {
+  id: string;
+  full_name: string;
+  price?: number;
+  assistantPrice: number;
+  ourFee: number;
+  rating: number;
+  know_how_areas: string;
+}
+
+interface Member {
+  name: string;
+  isOwner: boolean;
+}
+
+interface TaskDetails {
+  taskType: TaskType | null;
+  career: Career | null;
+  title: string;
+  pageCount: string;
+  format: string;
+  description: string;
+  maxAiPercentage: string;
+  maxPlagiarismPercentage: string;
+  dueDate: string;
+  files: File[];
+  selectedAssistant: Assistant | null;
+  couponCode: string;
+  discountAmount: number;
+  paymentType: 'individual' | 'group';
+  members: Member[];
+  groupId: string | null;
+}
+
+interface CouponStatus {
+  success: boolean;
+  message: string;
+}
+
 const formatOptions = ['Apa 7', 'MLA', 'Chicago', 'Harvard', 'Otro'];
 
-// Custom debounce hook to avoid lodash dependency
-const useDebounce = (value, delay) => {
+const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -21,10 +73,54 @@ const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
+const iconMap: { [key: string]: React.FC<LucideProps> } = {
+  FileText,
+  BarChart3,
+  Repeat,
+};
+
+// --- PROPS INTERFACES FOR STEPS ---
+interface Step1Props {
+  initialSearchTerm: string | undefined;
+  onTaskTypeSelect: (taskType: TaskType) => void;
+}
+
+interface Step2Props {
+  onNext: () => void;
+  onCareerSelect: (career: Career) => void;
+  selectedCareerId: string | undefined;
+}
+
+interface Step3Props {
+  onNext: () => void;
+  taskDetails: TaskDetails;
+  onTaskDetailsChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  onFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onFileRemove: (index: number) => void;
+}
+
+interface Step4Props {
+  onNext: () => void;
+  taskDetails: TaskDetails;
+  onAssistantSelect: (assistant: Assistant) => void;
+  selectedAssistantId: string | undefined;
+}
+
+interface Step5Props {
+  onFinalSubmit: () => void;
+  taskDetails: TaskDetails;
+  onCouponCodeChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onCouponApply: (discount: number) => void;
+  isSubmitting: boolean;
+  onPaymentTypeChange: (type: 'individual' | 'group') => void;
+  onMembersChange: (members: Member[]) => void;
+}
+
+
 // --- Step 1: Select Task Type ---
-const Step1 = ({ onNext, initialSearchTerm, onTaskTypeSelect }) => {
+const Step1: FC<Step1Props> = ({ initialSearchTerm, onTaskTypeSelect }) => {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm || '');
-  const [taskTypes, setTaskTypes] = useState([]);
+  const [taskTypes, setTaskTypes] = useState<TaskType[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   useEffect(() => {
@@ -37,19 +133,12 @@ const Step1 = ({ onNext, initialSearchTerm, onTaskTypeSelect }) => {
 
       if (error) {
         console.error('Error fetching task types:', error);
-      } else {
-        setTaskTypes(data);
+      } else if (data) {
+        setTaskTypes(data as TaskType[]);
       }
     };
     fetchTaskTypes();
   }, [debouncedSearchTerm]);
-
-  const iconMap = {
-    FileText: FileText,
-    BarChart3: BarChart3,
-    Repeat: Repeat,
-    // Map other icons as needed
-  };
 
   return (
     <>
@@ -87,8 +176,8 @@ const Step1 = ({ onNext, initialSearchTerm, onTaskTypeSelect }) => {
 };
 
 // --- Step 2: Select Career ---
-const Step2 = ({ onNext, onCareerSelect, selectedCareerId }) => {
-  const [careers, setCareers] = useState([]);
+const Step2: FC<Step2Props> = ({ onNext, onCareerSelect, selectedCareerId }) => {
+  const [careers, setCareers] = useState<Career[]>([]);
 
   useEffect(() => {
     const fetchCareers = async () => {
@@ -99,8 +188,8 @@ const Step2 = ({ onNext, onCareerSelect, selectedCareerId }) => {
 
       if (error) {
         console.error('Error fetching careers:', error);
-      } else {
-        setCareers(data);
+      } else if (data) {
+        setCareers(data as Career[]);
       }
     };
     fetchCareers();
@@ -129,11 +218,11 @@ const Step2 = ({ onNext, onCareerSelect, selectedCareerId }) => {
 };
 
 // --- Step 3: Job Details ---
-const Step3 = ({ onNext, taskDetails, onTaskDetailsChange, onFileChange, onFileRemove }) => {
-  const fileInputRef = useRef(null);
+const Step3: FC<Step3Props> = ({ onNext, taskDetails, onTaskDetailsChange, onFileChange, onFileRemove }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
-    fileInputRef.current.click();
+    fileInputRef.current?.click();
   };
 
   return (
@@ -209,12 +298,13 @@ const Step3 = ({ onNext, taskDetails, onTaskDetailsChange, onFileChange, onFileR
 };
 
 // --- Step 4: Select Assistant ---
-const Step4 = ({ onNext, taskDetails, onAssistantSelect, selectedAssistantId }) => {
-  const [assistants, setAssistants] = useState([]);
+const Step4: FC<Step4Props> = ({ onNext, taskDetails, onAssistantSelect, selectedAssistantId }) => {
+  const [assistants, setAssistants] = useState<Assistant[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAssistants = async () => {
+      if (!taskDetails.taskType?.id) return;
       setLoading(true);
 
       const { data: assistantTaskTypes, error: taskTypesError } = await supabase
@@ -255,48 +345,39 @@ const Step4 = ({ onNext, taskDetails, onAssistantSelect, selectedAssistantId }) 
         return;
       }
 
-      const calculatedAssistants = assistantUsers.map(user => {
-        const assistantPricing = assistantTaskTypes.find(att => att.assistant_id === user.id)?.assistant_pricing || [];
+      if (assistantUsers) {
+        const calculatedAssistants = assistantUsers.map(user => {
+          const assistantPricing = assistantTaskTypes.find(att => att.assistant_id === user.id)?.assistant_pricing || [];
+          let assistantPrice = 0;
 
-        let assistantPrice = 0;
+          const pagesPricing = assistantPricing.find(p => p.criterion_type === 'pages' && parseInt(taskDetails.pageCount) >= p.min_value && parseInt(taskDetails.pageCount) <= p.max_value);
+          if (pagesPricing) assistantPrice += pagesPricing.cost;
 
-        const pagesPricing = assistantPricing.find(p => p.criterion_type === 'pages' && parseInt(taskDetails.pageCount) >= p.min_value && parseInt(taskDetails.pageCount) <= p.max_value);
-        if (pagesPricing) {
-          assistantPrice += pagesPricing.cost;
-        }
+          const iaPricing = assistantPricing.find(p => p.criterion_type === 'ia' && parseInt(taskDetails.maxAiPercentage) >= p.min_value && parseInt(taskDetails.maxAiPercentage) <= p.max_value);
+          if (iaPricing) assistantPrice += iaPricing.cost;
 
-        const iaPricing = assistantPricing.find(p => p.criterion_type === 'ia' && parseInt(taskDetails.maxAiPercentage) >= p.min_value && parseInt(taskDetails.maxAiPercentage) <= p.max_value);
-        if (iaPricing) {
-          assistantPrice += iaPricing.cost;
-        }
+          const plagiarismPricing = assistantPricing.find(p => p.criterion_type === 'plagiarism' && parseInt(taskDetails.maxPlagiarismPercentage) >= p.min_value && parseInt(taskDetails.maxPlagiarismPercentage) <= p.max_value);
+          if (plagiarismPricing) assistantPrice += plagiarismPricing.cost;
 
-        const plagiarismPricing = assistantPricing.find(p => p.criterion_type === 'plagiarism' && parseInt(taskDetails.maxPlagiarismPercentage) >= p.min_value && parseInt(taskDetails.maxPlagiarismPercentage) <= p.max_value);
-        if (plagiarismPricing) {
-          assistantPrice += plagiarismPricing.cost;
-        }
+          const rating = 5;
+          const ourFee = assistantPrice * 0.20;
+          const totalPrice = assistantPrice + ourFee;
 
-        // Simular calificación, asumiendo un 5 si no hay calificaciones.
-        const rating = 5;
+          return {
+            ...user,
+            price: totalPrice,
+            assistantPrice: assistantPrice,
+            ourFee: ourFee,
+            rating: rating,
+            know_how_areas: (user.assistant_profiles as any)?.[0]?.know_how_areas || 'Especialista en varias áreas.'
+          };
+        }).filter(assistant => assistant.assistantPrice > 0);
 
-        const ourFee = assistantPrice * 0.20;
-        const totalPrice = assistantPrice + ourFee;
-
-        return {
-          ...user,
-          price: totalPrice,
-          assistantPrice: assistantPrice,
-          ourFee: ourFee,
-          rating: rating,
-          know_how_areas: user.assistant_profiles?.[0]?.know_how_areas || 'Especialista en varias áreas.'
-        };
-      }).filter(assistant => assistant.assistantPrice > 0); // Ocultar asistentes sin precio calculado
-
-      setAssistants(calculatedAssistants);
+        setAssistants(calculatedAssistants as Assistant[]);
+      }
       setLoading(false);
     };
-    if (taskDetails.taskType?.id) {
-        fetchAssistants();
-    }
+    fetchAssistants();
   }, [taskDetails]);
 
   if (loading) {
@@ -339,7 +420,7 @@ const Step4 = ({ onNext, taskDetails, onAssistantSelect, selectedAssistantId }) 
                   <Star size={16} className="text-blue-400" />
                   <p className="font-bold">{assistant.rating}</p>
                 </div>
-                <p className="font-bold text-green-500">${assistant.price.toFixed(2)}</p>
+                  <p className="font-bold text-green-500">${(assistant.price || 0).toFixed(2)}</p>
               </div>
             </div>
             <p className="text-sm text-gray-600 mt-2">{assistant.know_how_areas}</p>
@@ -354,11 +435,11 @@ const Step4 = ({ onNext, taskDetails, onAssistantSelect, selectedAssistantId }) 
 };
 
 // --- Step 5: Summary and Payment ---
-const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, isSubmitting, onPaymentTypeChange, onMembersChange }) => {
+const Step5: FC<Step5Props> = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, isSubmitting, onPaymentTypeChange, onMembersChange }) => {
   const [isGroupPaymentEnabled, setIsGroupPaymentEnabled] = useState(false);
-  const [members, setMembers] = useState([{ name: '', isOwner: true }]);
+  const [members, setMembers] = useState<Member[]>([{ name: '', isOwner: true }]);
   const [newMemberName, setNewMemberName] = useState('');
-  const [couponStatus, setCouponStatus] = useState(null);
+  const [couponStatus, setCouponStatus] = useState<CouponStatus | null>(null);
 
   const groupPaymentLink = isGroupPaymentEnabled ? `https://neow.app/payment/group/${taskDetails.groupId}` : '';
 
@@ -369,9 +450,11 @@ const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, 
             const { data: userData } = await supabase.from('users').select('full_name').eq('id', user.id).single();
             if(userData) {
                 const updatedMembers = [...members];
-                updatedMembers[0].name = userData.full_name;
-                setMembers(updatedMembers);
-                onMembersChange(updatedMembers);
+                if (updatedMembers.length > 0) {
+                  updatedMembers[0].name = userData.full_name;
+                  setMembers(updatedMembers);
+                  onMembersChange(updatedMembers);
+                }
             }
         }
     }
@@ -388,13 +471,13 @@ const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, 
     }
   };
 
-  const handleRemoveMember = (indexToRemove) => {
+  const handleRemoveMember = (indexToRemove: number) => {
     const updatedMembers = members.filter((_, index) => index !== indexToRemove);
     setMembers(updatedMembers);
     onMembersChange(updatedMembers);
   };
   
-  const handleToggleGroupPayment = (enabled) => {
+  const handleToggleGroupPayment = (enabled: boolean) => {
     setIsGroupPaymentEnabled(enabled);
     onPaymentTypeChange(enabled ? 'group' : 'individual');
   }
@@ -424,7 +507,7 @@ const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, 
 
   const assistantPrice = taskDetails.selectedAssistant?.assistantPrice || 0;
   const ourFee = taskDetails.selectedAssistant?.ourFee || 0;
-  const totalPrice = taskDetails.selectedAssistant?.price || 0;
+  const totalPrice = taskDetails.selectedAssistant?.price ?? 0;
   const finalTotal = totalPrice - taskDetails.discountAmount;
 
   return (
@@ -439,7 +522,7 @@ const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, 
               <p className="text-sm text-gray-500">{taskDetails.career?.name} ° {taskDetails.taskType?.name}</p>
             </div>
             <div className="text-right">
-              <p className="font-bold text-green-500">${totalPrice.toFixed(2)}</p>
+              <p className="font-bold text-green-500">${(taskDetails.selectedAssistant?.price ?? 0).toFixed(2)}</p>
               <p className="text-sm text-gray-400">{new Date(taskDetails.dueDate).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</p>
             </div>
           </div>
@@ -535,10 +618,10 @@ const Step5 = ({ onFinalSubmit, taskDetails, onCouponCodeChange, onCouponApply, 
 
 
 // --- Main Component ---
-const CreateTask = () => {
+const CreateTask: FC = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [taskDetails, setTaskDetails] = useState({
+  const [taskDetails, setTaskDetails] = useState<TaskDetails>({
     taskType: null,
     career: null,
     title: '',
@@ -561,52 +644,54 @@ const CreateTask = () => {
 
   useEffect(() => {
     if (location.state?.preselectedTaskType) {
-      setTaskDetails(prev => ({ ...prev, taskType: location.state.preselectedTaskType }));
+      setTaskDetails(prev => ({ ...prev, taskType: location.state.preselectedTaskType as TaskType }));
       setStep(2);
     }
   }, [location.state]);
 
-  const onTaskTypeSelect = (taskType) => {
+  const onTaskTypeSelect = (taskType: TaskType) => {
     setTaskDetails(prev => ({ ...prev, taskType }));
     nextStep();
   };
 
-  const onCareerSelect = (career) => {
+  const onCareerSelect = (career: Career) => {
     setTaskDetails(prev => ({ ...prev, career }));
     nextStep();
   };
 
-  const onAssistantSelect = (assistant) => {
+  const onAssistantSelect = (assistant: Assistant) => {
     setTaskDetails(prev => ({ ...prev, selectedAssistant: assistant }));
     nextStep();
   };
 
-  const onTaskDetailsChange = (e) => {
+  const onTaskDetailsChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setTaskDetails(prev => ({ ...prev, [name]: value }));
   };
 
-  const onFileChange = (e) => {
-    setTaskDetails(prev => ({ ...prev, files: [...prev.files, ...Array.from(e.target.files)] }));
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setTaskDetails(prev => ({ ...prev, files: [...prev.files, ...Array.from(e.target.files!)] }));
+    }
   };
 
-  const onFileRemove = (index) => {
+  const onFileRemove = (index: number) => {
     setTaskDetails(prev => ({ ...prev, files: prev.files.filter((_, i) => i !== index) }));
   };
 
-  const onCouponCodeChange = (e) => {
+  const onCouponCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTaskDetails(prev => ({ ...prev, couponCode: e.target.value }));
   };
 
-  const onCouponApply = (discount) => {
+  const onCouponApply = (discount: number) => {
     setTaskDetails(prev => ({ ...prev, discountAmount: discount }));
   };
 
-  const onPaymentTypeChange = (type) => {
+  const onPaymentTypeChange = (type: 'individual' | 'group') => {
     setTaskDetails(prev => ({ ...prev, paymentType: type }));
   }
 
-  const onMembersChange = (members) => {
+  const onMembersChange = (members: Member[]) => {
     setTaskDetails(prev => ({...prev, members}));
   }
 
@@ -675,10 +760,10 @@ const CreateTask = () => {
       max_ai_percentage: parseInt(taskDetails.maxAiPercentage),
       max_plagiarism_percentage: parseInt(taskDetails.maxPlagiarismPercentage),
       due_date: taskDetails.dueDate,
-      assistant_price: taskDetails.selectedAssistant?.assistantPrice,
-      our_fee: taskDetails.selectedAssistant?.ourFee,
+      assistant_price: taskDetails.selectedAssistant?.assistantPrice ?? 0,
+      our_fee: taskDetails.selectedAssistant?.ourFee ?? 0,
       discount_amount: taskDetails.discountAmount,
-      total_price: taskDetails.selectedAssistant?.price - taskDetails.discountAmount,
+      total_price: (taskDetails.selectedAssistant?.price ?? 0) - taskDetails.discountAmount,
       status: 'Tarea Solicitada', // MODIFICADO
       payment_type: taskDetails.paymentType,
     };
@@ -772,7 +857,7 @@ const CreateTask = () => {
     }
   };
 
-  const titles = {
+  const titles: { [key: number]: string } = {
     1: "Tipo de tarea:",
     2: "Carrera:",
     3: "Detalles del Trabajo",
@@ -782,7 +867,7 @@ const CreateTask = () => {
 
   const renderStep = () => {
     switch (step) {
-      case 1: return <Step1 onNext={nextStep} initialSearchTerm={location.state?.searchTerm} onTaskTypeSelect={onTaskTypeSelect} />;
+      case 1: return <Step1 initialSearchTerm={location.state?.searchTerm} onTaskTypeSelect={onTaskTypeSelect} />;
       case 2: return <Step2 onNext={nextStep} onCareerSelect={onCareerSelect} selectedCareerId={taskDetails.career?.id} />;
       case 3: return <Step3 onNext={nextStep} taskDetails={taskDetails} onTaskDetailsChange={onTaskDetailsChange} onFileChange={onFileChange} onFileRemove={onFileRemove} />;
       case 4: return <Step4 onNext={nextStep} taskDetails={taskDetails} onAssistantSelect={onAssistantSelect} selectedAssistantId={taskDetails.selectedAssistant?.id} />;

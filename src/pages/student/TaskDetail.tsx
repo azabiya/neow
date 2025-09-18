@@ -1,11 +1,73 @@
 // src/pages/student/TaskDetail.tsx
 import { useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, FileText, Star, CheckCircle2, X } from 'lucide-react';
+import { FileText, Star, CheckCircle2, X } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
 
-// --- Componente de Modal ---
-const Modal = ({ title, children, onClose }) => (
+// --- TYPE DEFINITIONS ---
+interface ModalProps {
+  title: string;
+  children: ReactNode;
+  onClose: () => void;
+}
+
+interface FileObject {
+  id: string;
+  original_name: string;
+  file_path: string;
+}
+
+interface TaskFile {
+  upload_type: string;
+  file: FileObject;
+}
+
+interface Assistant {
+  id: string;
+  full_name: string;
+}
+
+interface Student {
+  id: string;
+}
+
+interface Career {
+  name: string;
+}
+
+interface TaskType {
+  name: string;
+}
+
+interface Task {
+  id: string;
+  title: string;
+  status: string;
+  due_date: string;
+  total_price: number;
+  page_count: number;
+  format: string;
+  max_ai_percentage: number;
+  max_plagiarism_percentage: number;
+  description: string;
+  payment_type: 'individual' | 'group';
+  group_id: string | null;
+  assistant: Assistant | null;
+  student: Student | null;
+  career: Career | null;
+  task_type: TaskType | null;
+}
+
+interface TimelineStep {
+  id: string;
+  is_current: boolean;
+  title: string;
+  completed_at: string;
+}
+
+// --- Modal Component ---
+const Modal = ({ title, children, onClose }: ModalProps) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white rounded-xl p-6 w-full max-w-md m-4">
       <div className="flex justify-between items-center mb-4">
@@ -17,13 +79,12 @@ const Modal = ({ title, children, onClose }) => (
   </div>
 );
 
-
 const TaskDetail = () => {
-  const { taskId } = useParams();
+  const { taskId } = useParams<{ taskId: string }>();
   const navigate = useNavigate();
-  const [task, setTask] = useState(null);
-  const [timeline, setTimeline] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [task, setTask] = useState<Task | null>(null);
+  const [timeline, setTimeline] = useState<TimelineStep[]>([]);
+  const [files, setFiles] = useState<TaskFile[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Estados para los modales
@@ -73,8 +134,11 @@ const TaskDetail = () => {
         `)
         .eq('task_id', taskId);
 
-      if (filesError) console.error('Error fetching files:', filesError);
-      else setFiles(filesData);
+      if (filesError) {
+        console.error('Error fetching files:', filesError);
+      } else if (filesData) {
+        setFiles(filesData as unknown as TaskFile[]);
+      }
 
       setLoading(false);
     };
@@ -82,11 +146,10 @@ const TaskDetail = () => {
     fetchTaskData();
   }, [taskId]);
 
-  const updateTaskStatus = async (newStatus, timelineTitle) => {
+  const updateTaskStatus = async (newStatus: string, timelineTitle: string) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
   
-    // 1. Actualizar el estado de la tarea
     const { error: taskUpdateError } = await supabase
       .from('tasks')
       .update({ status: newStatus })
@@ -96,14 +159,12 @@ const TaskDetail = () => {
       return;
     }
   
-    // 2. Invalidar el estado actual en el timeline
     await supabase
         .from('task_status_timeline')
         .update({ is_current: false })
         .eq('task_id', taskId)
         .eq('is_current', true);
 
-    // 3. Añadir nuevo registro al timeline
     const { error: timelineInsertError } = await supabase
       .from('task_status_timeline')
       .insert({
@@ -118,8 +179,7 @@ const TaskDetail = () => {
       return;
     }
   
-    // 4. Actualizar el estado local para reflejar el cambio
-    setTask(prev => ({ ...prev, status: newStatus }));
+    setTask(prev => (prev ? { ...prev, status: newStatus } : null));
   };
 
   const handleCancelTask = async () => {
@@ -140,7 +200,7 @@ const TaskDetail = () => {
   
   const handleRateTask = async () => {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user || !task.assistant) return;
+    if (!user || !task?.assistant) return;
   
     const { error } = await supabase
       .from('ratings')
@@ -162,7 +222,7 @@ const TaskDetail = () => {
   };
   
   const handlePayment = () => {
-    if (task.payment_type === 'group' && task.group_id) {
+    if (task?.payment_type === 'group' && task.group_id) {
         navigate(`/payment/group/${task.group_id}`);
     } else {
         navigate(`/payment/transfer/individual/${taskId}`);
