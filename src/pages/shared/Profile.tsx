@@ -29,7 +29,7 @@ const Profile = () => {
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-50 font-inter text-black p-6 pb-24">
       <header className="text-center pt-8 pb-10">
-        <h1 className="text-4xl font-normal text-[#00B8DB] font-days">NEOW&lt;</h1>
+        <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 mx-auto" />
       </header>
 
       <main className="space-y-6">

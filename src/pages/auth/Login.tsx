@@ -59,7 +59,7 @@ const Login = ({ setUserRole }) => {
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm">
           <header className="text-center pt-12 pb-10">
-            <h1 className="text-5xl font-days font-normal text-[#00B8DB]">NEOW&lt;</h1>
+            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-12 mx-auto" />
           </header>
 
           <main className="w-full flex flex-col gap-8">
@@ -78,7 +78,7 @@ const Login = ({ setUserRole }) => {
                   placeholder="Correo Electrónico"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#00B8DB]"
+                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow"
                   required
                 />
               </div>
@@ -91,7 +91,7 @@ const Login = ({ setUserRole }) => {
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#00B8DB]"
+                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-yana-yellow"
                     required
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400">
@@ -99,7 +99,7 @@ const Login = ({ setUserRole }) => {
                   </button>
                 </div>
               </div>
-              <button type="submit" className="w-full bg-[#00B8DB] text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
+              <button type="submit" className="w-full bg-yana-yellow text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
                 {loading ? 'Iniciando...' : 'Iniciar sesión'}
               </button>
             </form>
@@ -107,7 +107,7 @@ const Login = ({ setUserRole }) => {
             <div className="text-center mt-4">
               <p className="text-gray-600">
                 ¿Aún no tienes cuenta?{' '}
-                <Link to="/register" className="font-semibold text-[#00B8DB]">
+                <Link to="/register" className="font-semibold text-yana-yellow">
                   Regístrate
                 </Link>
               </p>
@@ -117,7 +117,7 @@ const Login = ({ setUserRole }) => {
       </div>
       
       <footer className="absolute bottom-6 left-6 text-gray-500 text-sm hidden md:block">
-        © 2025 NEOW. Todos los derechos reservados.
+        © 2025 YANA MAKI. Todos los derechos reservados.
       </footer>
     </div>
   );

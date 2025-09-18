@@ -7,25 +7,25 @@ import { supabase } from '../../supabaseClient'; // Import supabase client
 // --- ICONOS (Sin cambios) ---
 
 const MoneyIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M7 16C7 16 8.5 18 12 18C15.5 18 17 16 17 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
 const FlexibilityIcon = () => (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 6V12L16 14" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
 const GrowthIcon = () => (
-     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M15 3H21V9" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M10 14L21 3" stroke="#00B8DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+     <svg className="text-yana-yellow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 13V19C18 19.5304 17.7893 20.0391 17.4142 20.4142C17.0391 20.7893 16.5304 21 16 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V8C3 7.46957 3.21071 6.96086 3.58579 6.58579C3.96086 6.21071 4.46957 6 5 6H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M15 3H21V9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M10 14L21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 
@@ -97,7 +97,7 @@ const LandingAssistant: React.FC = () => {
 
      useEffect(() => {
          setTestimonials([
-            { quote: '"Ser asistente en NEOW me ha permitido usar mis conocimientos para ganar un dinero extra sin descuidar mis estudios en la ESPOL. ¡Es genial!"', name: 'Carlos Zambrano', role: 'Asistente de Ingeniería' },
+            { quote: '"Ser asistente en YANA MAKI me ha permitido usar mis conocimientos para ganar un dinero extra sin descuidar mis estudios en la ESPOL. ¡Es genial!"', name: 'Carlos Zambrano', role: 'Asistente de Ingeniería' },
             { quote: '"La plataforma es súper fácil de usar y siempre hay nuevas oportunidades. Me encanta la flexibilidad que ofrece para nosotros los estudiantes en Ecuador."', name: 'Mónica Velez', role: 'Asistente de Arquitectura' },
             { quote: '"He mejorado mis propias habilidades académicas ayudando a otros. Además, los pagos son puntuales y seguros, directo a mi cuenta del Pichincha."', name: 'Sofía López', role: 'Asistente de Comunicaciones' },
          ]);
@@ -121,9 +121,9 @@ const LandingAssistant: React.FC = () => {
     const faqItems = [
         { q: "¿Cómo y cuándo recibiré mis pagos?", a: "Los pagos se procesan semanalmente a través de transferencia bancaria a la cuenta que registres en tu perfil. Recibirás el pago una vez que el estudiante apruebe la tarea que completaste." },
         { q: "¿Puedo rechazar una solicitud de tarea?", a: "Sí, tienes total libertad de aceptar o rechazar las solicitudes de tareas que recibas. Te recomendamos aceptar solo aquellas que se ajusten a tus conocimientos y disponibilidad." },
-        { q: "¿Qué tipo de soporte ofrece NEOW a los asistentes?", a: "Contamos con un equipo de soporte local en Ecuador disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
+        { q: "¿Qué tipo de soporte ofrece YANA MAKI a los asistentes?", a: "Contamos con un equipo de soporte local en Ecuador disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
         { q: "¿Cómo configuro mis precios por las tareas?", a: "Dentro de tu perfil, podrás establecer tus tarifas basadas en criterios como número de páginas, complejidad o porcentaje de IA permitido. Esto te da control total sobre tus ganancias." },
-        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. NEOW se adapta a tu horario de estudiante, no al revés." }
+        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. YANA MAKI se adapta a tu horario de estudiante, no al revés." }
     ];
 
     const itemsPerPage = 3;
@@ -167,14 +167,14 @@ const LandingAssistant: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <h1 className="text-3xl md:text-4xl font-days text-[#00B8DB] cursor-pointer" onClick={() => navigate('/')}>NEOW&lt;</h1>
+                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/" className="text-white font-medium hover:text-gray-200 transition-colors">Estudiante</a>
                             </nav>
                         </div>
                         <div className="flex items-center gap-2 md:gap-4">
                             <button onClick={() => navigate('/login')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Iniciar sesión</button>
-                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-cyan-600 transition-colors">Regístrate</button>
+                            <button onClick={() => navigate('/register')} className="px-4 md:px-6 py-2 text-sm font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button>
                         </div>
                     </div>
                 </header>
@@ -190,37 +190,37 @@ const LandingAssistant: React.FC = () => {
                     </div>
                 </div>
             </section>
-             {/* Qué es NEOW? Section */}
+             {/* Qué es YANA MAKI? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">NEOW?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">NEOW es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
-                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-cyan-600 transition-colors">Regístrate</button></div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-yana-yellow">YANA MAKI?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
+                    <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>           
             {/* Beneficios Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">NEOW</span></h2></div>
+                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-yana-yellow">YANA MAKI</span></h2></div>
                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                              <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mb-4"><MoneyIcon /></div>
+                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><MoneyIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">GANA DINERO EXTRA</h3>
                                  <p className="mt-2 text-sm text-gray-500">Recibe pagos seguros por cada tarea que completes en tu cuenta bancaria de Ecuador.</p>
                              </div>
                               <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mb-4"><FlexibilityIcon /></div>
+                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><FlexibilityIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">HORARIO FLEXIBLE</h3>
                                  <p className="mt-2 text-sm text-gray-500">Trabaja cuándo y dónde quieras, adaptado a tu vida estudiantil.</p>
                              </div>
                               <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mb-4"><GrowthIcon /></div>
+                                 <div className="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><GrowthIcon /></div>
                                  <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">DESARROLLA TUS HABILIDADES</h3>
                                  <p className="mt-2 text-sm text-gray-500">Refuerza tus conocimientos y gana experiencia en tu área de estudio.</p>
                              </div>
                          </div>
-                         <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-cyan-600 transition-colors">Únete ahora</button></div>
+                         <div className="mt-12 text-center"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Únete ahora</button></div>
                      </div>
                  </div>
             </section>
@@ -234,10 +234,10 @@ const LandingAssistant: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16">
                         <div className="relative">
-                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-cyan-200 hidden md:block"></div>
+                            <div className="absolute top-8 left-8 bottom-8 w-0.5 bg-yellow-200 hidden md:block"></div>
                             {steps.map((step, index) => (
                                 <div key={index} className="flex items-start relative" style={{ paddingBottom: index === steps.length - 1 ? 0 : '3rem' }}>
-                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-[#00B8DB] rounded-full flex items-center justify-center text-[#00B8DB] font-bold text-2xl z-10">{index + 1}</div>
+                                    <div className="flex-shrink-0 w-16 h-16 bg-white border-2 border-yana-yellow rounded-full flex items-center justify-center text-yana-yellow font-bold text-2xl z-10">{index + 1}</div>
                                     <div className="ml-6 pt-1">
                                         <h3 className="text-xl font-bold text-black">{step.title}</h3>
                                         <p className="mt-2 text-gray-600">{step.description}</p>
@@ -246,14 +246,14 @@ const LandingAssistant: React.FC = () => {
                             ))}
                         </div>
                         <div className="flex justify-center md:justify-end">
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-cyan-600 transition-colors">Empezar ahora</button>
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">Empezar ahora</button>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Stats Section */}
-            <section className="bg-[#CAEFF6] py-12">
+            <section className="bg-yellow-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+150</p><p className="mt-2 text-base text-gray-800">Estudiantes</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">$27</p><p className="mt-2 text-base text-gray-800">Ingreso Promedio por tarea</p></div>
@@ -283,7 +283,7 @@ const LandingAssistant: React.FC = () => {
                                 <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4">
                                     <p className="text-gray-700 italic flex-grow">"{testimonial.quote}"</p>
                                     <div className="flex items-center mt-6">
-                                        <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center text-xl font-bold text-[#00B8DB]">
+                                        <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-xl font-bold text-yana-yellow">
                                             {testimonial.name.charAt(0)}
                                         </div>
                                         <div className="ml-4">
@@ -301,7 +301,7 @@ const LandingAssistant: React.FC = () => {
             {/* Requisitos Section */}
             <section className="py-20 lg:py-24 bg-[#F7F7F7]">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">Qué necesitas para <span className="text-[#00B8DB]">unirte</span></h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">Qué necesitas para <span className="text-yana-yellow">unirte</span></h2>
                     <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">Buscamos a los mejores estudiantes de Ecuador para garantizar la calidad de nuestro servicio. Estos son los requisitos para formar parte de nuestra comunidad de asistentes.</p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
                         {requirements.map((req, index) => (
@@ -330,12 +330,12 @@ const LandingAssistant: React.FC = () => {
             <section className="py-20 lg:py-24">
                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                       <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                          <h2 className="text-3xl font-bold text-[#00B8DB]">¿Listo para empezar a ganar?</h2>
+                          <h2 className="text-3xl font-bold text-yana-yellow">¿Listo para empezar a ganar?</h2>
                           <p className="mt-4 max-w-2xl mx-auto text-gray-600">
                              Únete a nuestra comunidad de asistentes académicos en Ecuador y convierte tu conocimiento en ingresos. El registro es rápido y sencillo.
                           </p>
                           <div className="mt-8">
-                              <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-cyan-600 transition-colors">
+                              <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-yana-yellow text-white rounded-lg hover:bg-yellow-600 transition-colors">
                                   Regístrate como asistente
                               </button>
                            </div>
@@ -348,16 +348,16 @@ const LandingAssistant: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <h1 className="text-3xl md:text-4xl font-days text-[#00B8DB]">NEOW&lt;</h1>
+                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
-                            <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
-                            <a href="#" className="hover:text-[#00B8DB]"><FacebookIcon /></a>
-                            <a href="#" className="hover:text-[#00B8DB]"><TikTokIcon /></a>
+                            <a href="#" className="hover:text-yana-yellow"><InstagramIcon /></a>
+                            <a href="#" className="hover:text-yana-yellow"><FacebookIcon /></a>
+                            <a href="#" className="hover:text-yana-yellow"><TikTokIcon /></a>
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 NEOW. Todos los derechos reservados.</p>
+                        <p>© 2025 YANA MAKI. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

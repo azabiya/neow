@@ -7,7 +7,7 @@ const NavItem = ({ to, icon: Icon, label }: { to: string, icon: React.ElementTyp
         to={to}
         className={({ isActive }) =>
             `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                isActive ? 'bg-[#00B8DB] text-white' : 'text-gray-700 hover:bg-gray-100'
+                isActive ? 'bg-yana-yellow text-white' : 'text-gray-700 hover:bg-gray-100'
             }`
         }
     >
@@ -32,8 +32,8 @@ export const SideNavigation = ({ userRole }: { userRole: 'student' | 'assistant'
 
     return (
         <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 p-4">
-            <div className="text-3xl font-days font-normal text-[#00B8DB] mb-10 px-2">
-                NEOW&lt;
+            <div className="mb-10 px-2">
+                <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
             </div>
 
             <nav className="flex flex-col gap-2">
