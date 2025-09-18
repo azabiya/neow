@@ -161,7 +161,7 @@ const AssistantHome = () => {
   return (
     <div className="bg-white min-h-screen font-inter">
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 md:hidden" />
+        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div>
         <Bell className="w-6 h-6 text-gray-400" />
       </header>

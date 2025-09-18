@@ -112,8 +112,8 @@ const LandingStudent: React.FC = () => {
 
         setTestimonials([
             { quote: '"Me salvaron el semestre con un ensayo de redacción. El asistente de la ULEAM captó al toque lo que necesitaba. ¡Full recomendado!"', name: 'Anthony Intriago', role: 'Estudiante de la ULEAM' },
-            { quote: '"Tenía un proyecto de cálculo súper yuca y aquí en YANA MAKI encontré un asistente de la PUCE que me explicó todo paso a paso. ¡Increíble servicio!"', name: 'Julia Espinoza', role: 'Estudiante de la PUCE' },
-            { quote: '"La plataforma es súper fácil de usar. Pude encargar una tarea de programación y el resultado fue 10/10. ¡Gracias, YANA MAKI!"', name: 'Doanny Loor', role: 'Estudiante de la UNEMI' },
+            { quote: '"Tenía un proyecto de cálculo súper yuca y aquí en IntiHelp encontré un asistente de la PUCE que me explicó todo paso a paso. ¡Increíble servicio!"', name: 'Julia Espinoza', role: 'Estudiante de la PUCE' },
+            { quote: '"La plataforma es súper fácil de usar. Pude encargar una tarea de programación y el resultado fue 10/10. ¡Gracias, IntiHelp!"', name: 'Doanny Loor', role: 'Estudiante de la UNEMI' },
             { quote: '"Siempre me ayudan con mis trabajos de la U. Es un alivio tener a alguien que te dé una mano cuando estás a full."', name: 'Roger Alava', role: 'Estudiante de la UNEMI' },
         ]);
     }, []);
@@ -173,7 +173,7 @@ const LandingStudent: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/assistants" className="text-white font-medium hover:text-gray-200 transition-colors">Asistente</a>
                             </nav>
@@ -197,19 +197,19 @@ const LandingStudent: React.FC = () => {
                 </div>
             </section>
             
-            {/* Qué es YANA MAKI? Section */}
+            {/* Qué es IntiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">IntiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
                     <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>
 
-            {/* Por qué usar YANA MAKI? Section */}
+            {/* Por qué usar IntiHelp? Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#00B8DB]">YANA MAKI?</span></h2></div>
+                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#00B8DB]">IntiHelp?</span></h2></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                             <div className="flex flex-col items-center">
@@ -320,7 +320,7 @@ const LandingStudent: React.FC = () => {
                      <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
                          <h2 className="text-3xl font-bold text-[#00B8DB]">¿Listo para mejorar tus calificaciones?</h2>
                          <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                           Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con YANA MAKI. El registro es gratis y toma menos de un minuto.
+                           Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
                          </p>
                          <div className="mt-8">
                             <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">
@@ -336,7 +336,7 @@ const LandingStudent: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
@@ -345,7 +345,7 @@ const LandingStudent: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 YANA MAKI. Todos los derechos reservados.</p>
+                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

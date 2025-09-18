@@ -98,7 +98,7 @@ const LandingAssistant: React.FC = () => {
 
      useEffect(() => {
          setTestimonials([
-            { quote: '"Ser asistente en YANA MAKI me ha permitido usar mis conocimientos para ganar un dinero extra sin descuidar mis estudios en la ESPOL. ¡Es genial!"', name: 'Carlos Zambrano', role: 'Asistente de Ingeniería' },
+            { quote: '"Ser asistente en IntiHelp me ha permitido usar mis conocimientos para ganar un dinero extra sin descuidar mis estudios en la ESPOL. ¡Es genial!"', name: 'Carlos Zambrano', role: 'Asistente de Ingeniería' },
             { quote: '"La plataforma es súper fácil de usar y siempre hay nuevas oportunidades. Me encanta la flexibilidad que ofrece para nosotros los estudiantes en Ecuador."', name: 'Mónica Velez', role: 'Asistente de Arquitectura' },
             { quote: '"He mejorado mis propias habilidades académicas ayudando a otros. Además, los pagos son puntuales y seguros, directo a mi cuenta del Pichincha."', name: 'Sofía López', role: 'Asistente de Comunicaciones' },
          ]);
@@ -122,9 +122,9 @@ const LandingAssistant: React.FC = () => {
     const faqItems = [
         { q: "¿Cómo y cuándo recibiré mis pagos?", a: "Los pagos se procesan semanalmente a través de transferencia bancaria a la cuenta que registres en tu perfil. Recibirás el pago una vez que el estudiante apruebe la tarea que completaste." },
         { q: "¿Puedo rechazar una solicitud de tarea?", a: "Sí, tienes total libertad de aceptar o rechazar las solicitudes de tareas que recibas. Te recomendamos aceptar solo aquellas que se ajusten a tus conocimientos y disponibilidad." },
-        { q: "¿Qué tipo de soporte ofrece YANA MAKI a los asistentes?", a: "Contamos con un equipo de soporte local en Ecuador disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
+        { q: "¿Qué tipo de soporte ofrece IntiHelp a los asistentes?", a: "Contamos con un equipo de soporte local en Ecuador disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
         { q: "¿Cómo configuro mis precios por las tareas?", a: "Dentro de tu perfil, podrás establecer tus tarifas basadas en criterios como número de páginas, complejidad o porcentaje de IA permitido. Esto te da control total sobre tus ganancias." },
-        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. YANA MAKI se adapta a tu horario de estudiante, no al revés." }
+        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. IntiHelp se adapta a tu horario de estudiante, no al revés." }
     ];
 
     const itemsPerPage = 3;
@@ -168,7 +168,7 @@ const LandingAssistant: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/" className="text-white font-medium hover:text-gray-200 transition-colors">Estudiante</a>
                             </nav>
@@ -191,18 +191,18 @@ const LandingAssistant: React.FC = () => {
                     </div>
                 </div>
             </section>
-             {/* Qué es YANA MAKI? Section */}
+             {/* Qué es IntiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">YANA MAKI?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">YANA MAKI es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#00B8DB]">IntiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es la plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Delegar nunca fue tan fácil y seguro!</p>
                     <div className="mt-10"><button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#00B8DB] text-white rounded-lg hover:bg-blue-600 transition-colors">Regístrate</button></div>
                 </div>
             </section>           
             {/* Beneficios Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">YANA MAKI</span></h2></div>
+                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#00B8DB]">IntiHelp</span></h2></div>
                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                              <div className="flex flex-col items-center">
@@ -349,7 +349,7 @@ const LandingAssistant: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#00B8DB]"><InstagramIcon /></a>
@@ -358,7 +358,7 @@ const LandingAssistant: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 YANA MAKI. Todos los derechos reservados.</p>
+                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

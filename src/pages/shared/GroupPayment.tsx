@@ -67,7 +67,7 @@ const GroupPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <img src="/src/assets/logo.svg" alt="YANA MAKI" className="h-10 mx-auto" />
+                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow">
@@ -109,7 +109,7 @@ const GroupPayment = () => {
             </main>
 
             <footer className="text-center text-gray-500 text-sm py-6">
-                © 2025 YANA MAKI. Todos los derechos reservados.
+                © 2025 IntiHelp. Todos los derechos reservados.
             </footer>
         </div>
     );
