@@ -3,7 +3,6 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
 import logo from '../../assets/logo.svg';
-import { supabase } from '../../supabaseClient';
 
 // --- ICONOS (Sin cambios) ---
 const QualityIcon = () => (
@@ -73,48 +72,24 @@ const FaqItem = ({ question, answer }: { question: string, answer: string }) => 
     );
 };
 
-// ======================= INICIO DE CAMBIOS =======================
 // --- TIPOS ---
 type Testimonial = {
     quote: string;
     name: string;
     role: string;
 };
-// ======================== FIN DE CAMBIOS ========================
-
 
 // --- COMPONENTE PRINCIPAL ---
 const LandingStudent: React.FC = () => {
     // --- HOOKS Y ESTADOS ---
     const navigate = useNavigate();
-    const [stats, setStats] = useState({ completedTasks: 0, availableAssistants: 0, satisfactionRate: 0 });
-    // ======================= INICIO DE CAMBIOS =======================
     const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-    // ======================== FIN DE CAMBIOS ========================
     const [currentIndex, setCurrentIndex] = useState(1);
     const [transitionEnabled, setTransitionEnabled] = useState(true);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
-        const fetchStats = async () => {
-            const { count: completedTasks } = await supabase.from('tasks').select('*', { count: 'exact', head: true }).in('status', ['Tarea Calificada', 'Asistente Remunerado']);
-            const { count: availableAssistants } = await supabase.from('users').select('*', { count: 'exact', head: true }).eq('role', 'assistant').eq('is_active', true);
-            const { data: ratingsData } = await supabase.from('ratings').select('rating');
-            
-            let satisfactionRate = 98;
-            if (ratingsData && ratingsData.length > 0) {
-                const totalRating = ratingsData.reduce((acc, r) => acc + r.rating, 0);
-                satisfactionRate = Math.round((totalRating / (ratingsData.length * 5)) * 100);
-            }
-
-            setStats({
-                completedTasks: completedTasks || 150,
-                availableAssistants: availableAssistants || 25,
-                satisfactionRate: satisfactionRate
-            });
-        };
-        fetchStats();
-
+        // --- Carga de testimonios ---
         setTestimonials([
             { quote: '"Me gustó que se puede organizar trabajos grupales y hacer que cada integrante envié su parte. ¡Full recomendado para trabajos grupales!"', name: 'Anthony Intriago', role: 'Estudiante de la ULEAM' },
             { quote: '"Los resultados siempre son buenos y si no te convencen te ayudan para que te hagan otro trabajo"', name: 'Julia Espinoza', role: 'Estudiante de la PUCE' },
@@ -123,6 +98,7 @@ const LandingStudent: React.FC = () => {
         ]);
     }, []);
     
+    // --- LÓGICA DEL CARRUSEL ---
     const getItemsPerPage = useCallback(() => window.innerWidth >= 768 ? 3 : 1, []);
     const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
 
@@ -175,6 +151,7 @@ const LandingStudent: React.FC = () => {
         };
     }, [testimonials.length, itemsPerPage, startAutoPlay]);
     
+    // --- DATOS FIJOS ---
     const steps = [
         { title: 'Solicitas', description: 'Describe tu tarea, sube los archivos necesarios y elige al asistente perfecto para ti.' },
         { title: 'Creamos', description: 'Tu asistente se pondrá a trabajar, manteniéndote al día con avances si es necesario.' },
@@ -293,14 +270,16 @@ const LandingStudent: React.FC = () => {
                 </div>
             </section>
 
+            {/* ======================= INICIO DE CAMBIOS ======================= */}
             {/* Stats Section */}
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+146</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">17</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">96.7%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+150</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">25</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">98%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
                 </div>
             </section>
+            {/* ======================== FIN DE CAMBIOS ======================== */}
             
             {/* Testimonials Section */}
             <section className="py-20 lg:py-24">
@@ -360,15 +339,15 @@ const LandingStudent: React.FC = () => {
             <section className="py-20 lg:py-24">
                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                        <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                             <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
-                             <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                                 Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
-                             </p>
-                             <div className="mt-8">
-                                  <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
-                                      Regístrate
-                                  </button>
-                             </div>
+                              <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
+                              <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+                                  Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
+                              </p>
+                              <div className="mt-8">
+                                    <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
+                                        Regístrate
+                                    </button>
+                              </div>
                        </div>
                  </div>
             </section>
