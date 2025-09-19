@@ -216,31 +216,31 @@ const LandingStudent: React.FC = () => {
 
             {/* Por qué usar IntiHelp? Section */}
             <section className="py-20 lg:py-24 bg-white">
-                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                      <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">IntiHelp?</span></h2></div>
-                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
-                           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
-                                <div className="flex flex-col items-center">
-                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
-                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">TAREAS DE CALIDAD</h3>
-                                     <p className="mt-2 text-sm text-gray-500">Asistentes verificados y calificados por otros estudiantes garantizan un trabajo impecable.</p>
-                                </div>
-                                 <div className="flex flex-col items-center">
-                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
-                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">ENTREGAS A TIEMPO</h3>
-                                     <p className="mt-2 text-sm text-gray-500">Establece tu fecha de entrega y recibe tu tarea sin demoras. ¡Adiós al estrés de última hora!</p>
-                                </div>
-                                 <div className="flex flex-col items-center">
-                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
-                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
-                                     <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea sino ¡Te dolvemos tu dinero!.</p>
-                                </div>
-                           </div>
-                           <div className="mt-12 text-center">
-                                <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
-                           </div>
-                      </div>
-                 </div>
+                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">IntiHelp?</span></h2></div>
+                    <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+                            <div className="flex flex-col items-center">
+                                <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
+                                <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">TAREAS DE CALIDAD</h3>
+                                <p className="mt-2 text-sm text-gray-500">Asistentes verificados y calificados por otros estudiantes garantizan un trabajo impecable.</p>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
+                                <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">ENTREGAS A TIEMPO</h3>
+                                <p className="mt-2 text-sm text-gray-500">Establece tu fecha de entrega y recibe tu tarea sin demoras. ¡Adiós al estrés de última hora!</p>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
+                                <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
+                                <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea sino ¡Te dolvemos tu dinero!.</p>
+                            </div>
+                        </div>
+                        <div className="mt-12 text-center">
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* Cómo funciona Section */}
@@ -270,7 +270,6 @@ const LandingStudent: React.FC = () => {
                 </div>
             </section>
 
-            {/* ======================= INICIO DE CAMBIOS ======================= */}
             {/* Stats Section */}
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
@@ -279,7 +278,6 @@ const LandingStudent: React.FC = () => {
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">98.6%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
                 </div>
             </section>
-            {/* ======================== FIN DE CAMBIOS ======================== */}
             
             {/* Testimonials Section */}
             <section className="py-20 lg:py-24">
@@ -297,14 +295,14 @@ const LandingStudent: React.FC = () => {
                             </div>
                         )}
                     </div>
-                     <div className="overflow-hidden">
+                    <div className="overflow-hidden">
                         <div
-                           className="flex"
-                           style={{
-                               transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
-                               transition: transitionEnabled ? `transform ${'0.5s'} ease-in-out` : 'none'
-                           }}
-                           onTransitionEnd={handleTransitionEnd}
+                            className="flex"
+                            style={{
+                                transform: `translateX(-${currentIndex * (100 / itemsPerPage)}%)`,
+                                transition: transitionEnabled ? `transform ${'0.5s'} ease-in-out` : 'none'
+                            }}
+                            onTransitionEnd={handleTransitionEnd}
                         >
                             {loopedTestimonials.map((testimonial, index) => (
                                 <div key={index} className="flex flex-col flex-shrink-0 w-full md:w-1/3 px-4" style={{minWidth: `${100/itemsPerPage}%`}}>
@@ -337,19 +335,19 @@ const LandingStudent: React.FC = () => {
             
             {/* Final CTA Section */}
             <section className="py-20 lg:py-24">
-                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                       <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                              <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
-                              <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                                  Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
-                              </p>
-                              <div className="mt-8">
-                                    <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
-                                        Regístrate
-                                    </button>
-                              </div>
-                       </div>
-                 </div>
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
+                        <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
+                        <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+                            Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
+                        </p>
+                        <div className="mt-8">
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
+                                Regístrate
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* Footer */}
