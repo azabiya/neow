@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { User, Link as LinkIcon } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface GroupMember {
   id: string;
@@ -72,7 +73,7 @@ const GroupPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+                <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow">

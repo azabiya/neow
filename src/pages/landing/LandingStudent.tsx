@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
+import logo from '../../assets/logo.svg';
 import { supabase } from '../../supabaseClient';
 
 // --- ICONOS (Sin cambios) ---
@@ -192,7 +193,7 @@ const LandingStudent: React.FC = () => {
                 <header className="w-full max-w-screen-2xl mx-auto py-5 absolute top-0 z-10 px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center border-b border-white/20 pb-4">
                         <div className="flex items-center gap-4 md:gap-8">
-                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                            <img src={logo} alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                             <nav className="hidden md:flex items-center">
                                 <a href="/assistants" className="text-white font-medium hover:text-gray-200 transition-colors">Asistente</a>
                             </nav>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Bell, Star, CheckCircle2, Timer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface ProfileData {
   id: string;
@@ -183,7 +184,7 @@ const AssistantHome = () => {
   return (
     <div className="bg-white min-h-screen font-inter">
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 md:hidden" />
+        <img src={logo} alt="IntiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div>
         <Bell className="w-6 h-6 text-gray-400" />
       </header>

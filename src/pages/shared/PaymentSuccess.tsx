@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Check } from 'lucide-react';
+import logo from '../../assets/logo.svg';
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ const PaymentSuccess = () => {
   return (
     <div className="flex flex-col min-h-screen max-w-md mx-auto bg-white p-6 font-inter">
       <header className="text-center pt-8 pb-10">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+        <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
       </header>
 
       <main className="flex-grow flex flex-col items-center justify-center">

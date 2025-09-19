@@ -1,6 +1,7 @@
 // src/pages/Profile.tsx
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Bell, User, CreditCard, HelpCircle, LogOut, Star, CheckCircle2, Pencil, FilePenLine, ChevronRight } from 'lucide-react';
+import logo from '../../assets/logo.svg';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Profile = () => {
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-50 font-inter text-black p-6 pb-24">
       <header className="text-center pt-8 pb-10">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+        <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
       </header>
 
       <main className="space-y-6">

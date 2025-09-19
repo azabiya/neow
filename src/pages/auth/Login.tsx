@@ -4,6 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface LoginProps {
   setUserRole: Dispatch<SetStateAction<'student' | 'assistant' | null>>;
@@ -64,7 +65,7 @@ const Login = ({ setUserRole }: LoginProps) => {
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm">
           <header className="text-center pt-12 pb-10">
-            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-12 mx-auto" />
+            <img src={logo} alt="IntiHelp" className="h-12 mx-auto" />
           </header>
 
           <main className="w-full flex flex-col gap-8">

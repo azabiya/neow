@@ -4,6 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { Home as HomeIcon, NotebookText, User, CreditCard, HelpCircle, LogOut, FilePenLine } from 'lucide-react';
 import { supabase } from './supabaseClient';
+import logo from './assets/logo.svg';
 
 // Auth Pages
 import Login from './pages/auth/Login';
@@ -73,7 +74,7 @@ const Sidebar = ({ userRole }: { userRole: string }) => {
     return (
         <div className="h-full flex flex-col p-6 bg-white border-r border-gray-200">
             <div className="mb-10">
-                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
+                <img src={logo} alt="IntiHelp" className="h-10" />
             </div>
             <nav className="flex-1 flex flex-col gap-2">
                 {mainOptions.map((option) => (

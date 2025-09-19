@@ -4,6 +4,7 @@ import { Upload } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
+import logo from '../../assets/logo.svg';
 
 interface Task {
   id: string;
@@ -178,7 +179,7 @@ const TransferPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+                <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow flex items-center justify-center">
