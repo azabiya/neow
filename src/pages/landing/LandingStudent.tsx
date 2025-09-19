@@ -73,13 +73,24 @@ const FaqItem = ({ question, answer }: { question: string, answer: string }) => 
     );
 };
 
+// ======================= INICIO DE CAMBIOS =======================
+// --- TIPOS ---
+type Testimonial = {
+    quote: string;
+    name: string;
+    role: string;
+};
+// ======================== FIN DE CAMBIOS ========================
+
 
 // --- COMPONENTE PRINCIPAL ---
 const LandingStudent: React.FC = () => {
-    // --- HOOKS Y ESTADOS (Sin cambios) ---
+    // --- HOOKS Y ESTADOS ---
     const navigate = useNavigate();
     const [stats, setStats] = useState({ completedTasks: 0, availableAssistants: 0, satisfactionRate: 0 });
-    const [testimonials, setTestimonials] = useState<any[]>([]);
+    // ======================= INICIO DE CAMBIOS =======================
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+    // ======================== FIN DE CAMBIOS ========================
     const [currentIndex, setCurrentIndex] = useState(1);
     const [transitionEnabled, setTransitionEnabled] = useState(true);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -190,9 +201,7 @@ const LandingStudent: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
                         <button onClick={() => navigate('/login')} className="px-4 md:px-8 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Ingresa</button>
-                        {/* ======================= INICIO DE CAMBIOS ======================= */}
                         <button onClick={() => navigate('/register')} className="px-4 md:px-8 py-2 text-sm font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
-                        {/* ======================== FIN DE CAMBIOS ======================== */}
                     </div>
                 </div>
             </header>
@@ -223,9 +232,7 @@ const LandingStudent: React.FC = () => {
                     <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#FF5A5A]">IntiHelp?</span></h2>
                     <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es una plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Encargar tareas nunca fue tan fácil y seguro!</p>
                     <div className="mt-10">
-                        {/* ======================= INICIO DE CAMBIOS ======================= */}
                         <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
-                        {/* ======================== FIN DE CAMBIOS ======================== */}
                     </div>
                 </div>
             </section>
@@ -233,31 +240,29 @@ const LandingStudent: React.FC = () => {
             {/* Por qué usar IntiHelp? Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                     <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">IntiHelp?</span></h2></div>
-                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
-                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
-                             <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
-                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">TAREAS DE CALIDAD</h3>
-                                 <p className="mt-2 text-sm text-gray-500">Asistentes verificados y calificados por otros estudiantes garantizan un trabajo impecable.</p>
-                             </div>
-                              <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
-                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">ENTREGAS A TIEMPO</h3>
-                                 <p className="mt-2 text-sm text-gray-500">Establece tu fecha de entrega y recibe tu tarea sin demoras. ¡Adiós al estrés de última hora!</p>
-                             </div>
-                              <div className="flex flex-col items-center">
-                                 <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
-                                 <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
-                                 <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea sino ¡Te dolvemos tu dinero!.</p>
-                             </div>
-                         </div>
-                         <div className="mt-12 text-center">
-                            {/* ======================= INICIO DE CAMBIOS ======================= */}
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
-                            {/* ======================== FIN DE CAMBIOS ======================== */}
-                         </div>
-                     </div>
+                      <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">IntiHelp?</span></h2></div>
+                      <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
+                           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+                                <div className="flex flex-col items-center">
+                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><QualityIcon /></div>
+                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">TAREAS DE CALIDAD</h3>
+                                     <p className="mt-2 text-sm text-gray-500">Asistentes verificados y calificados por otros estudiantes garantizan un trabajo impecable.</p>
+                                </div>
+                                 <div className="flex flex-col items-center">
+                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><TimeIcon /></div>
+                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">ENTREGAS A TIEMPO</h3>
+                                     <p className="mt-2 text-sm text-gray-500">Establece tu fecha de entrega y recibe tu tarea sin demoras. ¡Adiós al estrés de última hora!</p>
+                                </div>
+                                 <div className="flex flex-col items-center">
+                                     <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-4"><SecurityIcon /></div>
+                                     <h3 className="text-xl font-bebas tracking-wide font-semibold text-black">PAGOS SEGUROS</h3>
+                                     <p className="mt-2 text-sm text-gray-500">Tu pago se libera al asistente solo cuando apruebas la entrega final de la tarea sino ¡Te dolvemos tu dinero!.</p>
+                                </div>
+                           </div>
+                           <div className="mt-12 text-center">
+                                <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
+                           </div>
+                      </div>
                  </div>
             </section>
 
@@ -282,9 +287,7 @@ const LandingStudent: React.FC = () => {
                             ))}
                         </div>
                         <div className="flex justify-center md:justify-end">
-                            {/* ======================= INICIO DE CAMBIOS ======================= */}
                             <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Crear tarea</button>
-                            {/* ======================== FIN DE CAMBIOS ======================== */}
                         </div>
                     </div>
                 </div>
@@ -293,9 +296,9 @@ const LandingStudent: React.FC = () => {
             {/* Stats Section */}
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+147</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">17</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">97.4%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+{stats.completedTasks}</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">{stats.availableAssistants}</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">{stats.satisfactionRate}%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
                 </div>
             </section>
             
@@ -356,19 +359,17 @@ const LandingStudent: React.FC = () => {
             {/* Final CTA Section */}
             <section className="py-20 lg:py-24">
                  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                      <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
-                           <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
-                           <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                              Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
-                           </p>
-                           <div className="mt-8">
-                               {/* ======================= INICIO DE CAMBIOS ======================= */}
-                               <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
-                                   Regístrate
-                               </button>
-                               {/* ======================== FIN DE CAMBIOS ======================== */}
-                          </div>
-                      </div>
+                       <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
+                             <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
+                             <p className="mt-4 max-w-2xl mx-auto text-gray-600">
+                                 Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
+                             </p>
+                             <div className="mt-8">
+                                  <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
+                                      Regístrate
+                                  </button>
+                             </div>
+                       </div>
                  </div>
             </section>
 
