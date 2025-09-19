@@ -111,7 +111,7 @@ const Tasks = () => {
               <div
                 key={task.id}
                 onClick={() => handleTaskClick(task.id)}
-                className="bg-white rounded-xl p-4 cursor-pointer border border-gray-200 hover:border-cyan-400"
+                className="bg-white rounded-xl p-4 cursor-pointer border border-gray-200 hover:border-brand-red"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h4 className="font-bold text-lg text-black">{task.title}</h4>

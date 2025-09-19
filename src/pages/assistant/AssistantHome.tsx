@@ -184,7 +184,7 @@ const AssistantHome = () => {
   return (
     <div className="bg-white min-h-screen font-inter">
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src={logo} alt="IntiHelp" className="h-10 md:hidden" />
+        <img src={logo} alt="intiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div>
         <Bell className="w-6 h-6 text-gray-400" />
       </header>
@@ -249,7 +249,7 @@ const AssistantHome = () => {
                 <div 
                   key={item.id} 
                   onClick={() => navigate(`/task/${item.id}`)}
-                  className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm cursor-pointer hover:border-cyan-300 transition-colors"
+                  className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm cursor-pointer hover:border-brand-red transition-colors"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-black">{item.title}</h4>

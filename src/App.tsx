@@ -68,13 +68,13 @@ const Sidebar = ({ userRole }: { userRole: string }) => {
 
     const getLinkClass = ({ isActive }: { isActive: boolean }) =>
         `flex items-center gap-4 p-3 rounded-lg transition-colors text-base font-medium ${
-        isActive ? 'text-primary bg-yellow-50' : 'text-gray-700 hover:bg-gray-100'
+        isActive ? 'text-primary bg-red-50' : 'text-gray-700 hover:bg-gray-100'
         }`;
 
     return (
         <div className="h-full flex flex-col p-6 bg-white border-r border-gray-200">
             <div className="mb-10">
-                <img src={logo} alt="IntiHelp" className="h-10" />
+                <img src={logo} alt="intiHelp" className="h-10" />
             </div>
             <nav className="flex-1 flex flex-col gap-2">
                 {mainOptions.map((option) => (
