@@ -293,9 +293,9 @@ const LandingStudent: React.FC = () => {
             {/* Stats Section */}
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+{stats.completedTasks}</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">{stats.availableAssistants}</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">{stats.satisfactionRate}%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+147</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">17</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">97.4%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
                 </div>
             </section>
             
