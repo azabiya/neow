@@ -199,7 +199,7 @@ const AssistantHome = () => {
           <div>
             <div className="flex items-center justify-center gap-1">
               <p className="text-2xl font-bold">{stats.avgRating.toFixed(1)}</p>
-              <Star size={20} className="text-red-400 fill-yellow-400" />
+              <Star size={20} className="text-red-400 fill-red-400" />
             </div>
             <p className="text-xs text-gray-500 mt-1">Calif. promedio</p>
           </div>
