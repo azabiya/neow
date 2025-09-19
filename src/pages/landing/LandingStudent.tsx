@@ -274,15 +274,9 @@ const LandingStudent: React.FC = () => {
             {/* Stats Section */}
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
-<<<<<<< HEAD
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+150</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">25</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">98%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
-=======
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+117</p><p className="mt-2 text-base text-gray-800">Tareas realizadas</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">19</p><p className="mt-2 text-base text-gray-800">Asistentes disponibles</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">98.6%</p><p className="mt-2 text-base text-gray-800">De satisfacción</p></div>
->>>>>>> f547078b1ac35597a772c83b85d08d01d9624ad0
                 </div>
             </section>
             {/* ======================== FIN DE CAMBIOS ======================== */}
