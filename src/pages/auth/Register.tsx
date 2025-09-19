@@ -254,9 +254,9 @@ const Register = () => {
     return (
         <div className="flex flex-col min-h-screen p-6 bg-white relative md:items-center md:justify-center">
             <div className="w-full md:max-w-md flex flex-col flex-grow md:flex-grow-0">
-                <header className="text-center pt-8 md:pt-0 pb-8"> <img src={logo} alt="IntiHelp" className="h-12 mx-auto" /> </header>
+                <header className="text-center pt-8 md:pt-0 pb-8"> <img src={logo} alt="intiHelp" className="h-12 mx-auto" /> </header>
                 <main className="flex-grow flex flex-col items-center w-full">
-                    <div className="w-full text-center mb-8"> <h2 className="text-3xl font-normal text-black">¡Únete a IntiHelp!</h2> </div>
+                    <div className="w-full text-center mb-8"> <h2 className="text-3xl font-normal text-black">¡Únete a intiHelp!</h2> </div>
                     <div className="w-full mb-8">
                         <p className="text-sm text-gray-600 mb-2 text-center">Paso {step} de {totalSteps}</p>
                         <div className="w-full bg-gray-200 rounded-full h-1.5">
@@ -272,7 +272,7 @@ const Register = () => {
                 {error && <p className="text-red-500 text-center my-4">{error}</p>}
                 <footer className="w-full mt-auto pt-10 flex gap-4">
                     {step > 1 && ( <button onClick={prevStep} disabled={loading} className="w-1/2 py-3 border border-black rounded-lg font-semibold text-black flex items-center justify-center gap-2 hover:bg-gray-100 transition-colors"> <ArrowLeft size={20} /> Atrás </button> )}
-                    <button onClick={nextStep} disabled={loading} className={`py-3 bg-[#FF5A5A] text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-red-600 transition-colors ${step === 1 ? 'w-full' : 'w-1/2'}`}>
+                    <button onClick={nextStep} disabled={loading} className={`py-3 bg-[#FF5A5A] text-white rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-[#E14C4C] transition-colors ${step === 1 ? 'w-full' : 'w-1/2'}`}>
                         {loading ? 'Registrando...' : (step === totalSteps ? 'Finalizar' : 'Siguiente')}
                     </button>
                 </footer>

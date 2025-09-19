@@ -59,9 +59,9 @@ const LandingAssistant: React.FC = () => {
     const faqItems = [
         { q: "¿Cómo y cuándo recibiré mis pagos?", a: "Una vez que el estudiante apruebe la tarea que completaste recibirás tu pago a través de una transferencia bancaria a la cuenta que registres en tu perfil." },
         { q: "¿Puedo rechazar una solicitud de tarea?", a: "Sí, tienes total libertad de aceptar o rechazar las solicitudes de tareas que recibas. Te recomendamos aceptar solo aquellas que se ajusten a tus conocimientos y disponibilidad." },
-        { q: "¿Qué tipo de soporte ofrece IntiHelp a los asistentes?", a: "Contamos con un equipo de soporte disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
+        { q: "¿Qué tipo de soporte ofrece intiHelp a los asistentes?", a: "Contamos con un equipo de soporte disponible por WhatsApp para ayudarte con cualquier duda sobre la plataforma, los pagos o la comunicación con los estudiantes." },
         { q: "¿Cómo configuro mis precios por las tareas?", a: "Dentro de tu perfil, podrás establecer tus tarifas basadas en criterios como número de páginas, complejidad o porcentaje de IA permitido. Esto te da control total sobre tus ganancias." },
-        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. IntiHelp se adapta a tu horario de estudiante, no al revés." }
+        { q: "¿Hay un mínimo de tareas que debo completar?", a: "No hay ningún mínimo. Tienes total flexibilidad para decidir cuántas tareas quieres realizar. intiHelp se adapta a tu horario de estudiante, no al revés." }
     ];
     // --- LÓGICA DEL CARRUSEL (Sin cambios) ---
     const handleNext = useCallback(() => {
@@ -107,14 +107,14 @@ const LandingAssistant: React.FC = () => {
             <header className="w-full bg-white shadow-sm z-20">
                 <div className="flex justify-between items-center max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex items-center gap-4 md:gap-8">
-                        <img src={logo} alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                        <img src={logo} alt="intiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                         <nav className="hidden md:flex items-center">
                             <a href="/" className="text-black font-medium hover:text-[#FF5A5A] transition-colors">Estudiante</a>
                         </nav>
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
                         <button onClick={() => navigate('/login')} className="px-4 md:px-8 py-2 text-sm font-semibold bg-white text-black rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Ingresa</button>
-                        <button onClick={() => navigate('/register')} className="px-4 md:px-8 py-2 text-sm font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
+                        <button onClick={() => navigate('/register')} className="px-4 md:px-8 py-2 text-sm font-semibold bg-[#FF5A5A] text-white rounded-lg hover:bg-[#E14C4C] transition-all">Regístrate</button>
                     </div>
                 </div>
             </header>
@@ -141,20 +141,20 @@ const LandingAssistant: React.FC = () => {
                 </div>
             </section>
 
-            {/* Qué es IntiHelp? Section */}
+            {/* Qué es intiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#FF5A5A]">IntiHelp?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es una plataforma creada para ayudar a los estudiantes del Ecuador. Te permitimos aprovechar tu tiempo libre para gener ingresos ayudando a otros con sus tareas. </p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#FF5A5A]">intiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">intiHelp es una plataforma creada para ayudar a los estudiantes del Ecuador. Te permitimos aprovechar tu tiempo libre para gener ingresos ayudando a otros con sus tareas. </p>
                     <div className="mt-10">
-                        <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
+                        <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:bg-[#E14C4C] transition-all">Regístrate</button>
                     </div>
                 </div>
             </section>
             {/* Beneficios Section */}
             <section className="py-20 lg:py-24 bg-white">
                  <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                      <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#FF5A5A]">IntiHelp</span></h2></div>
+                      <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">Beneficios de ser un Asistente <span className="text-[#FF5A5A]">intiHelp</span></h2></div>
                       <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                                 <div className="flex flex-col items-center">
@@ -174,7 +174,7 @@ const LandingAssistant: React.FC = () => {
                                 </div>
                            </div>
                           <div className="mt-12 text-center">
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Únete ahora</button>
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:bg-[#E14C4C] transition-all">Únete ahora</button>
                           </div>
                       </div>
                  </div>
@@ -201,7 +201,7 @@ const LandingAssistant: React.FC = () => {
                             ))}
                         </div>
                         <div className="flex justify-center md:justify-end">
-                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Empezar ahora</button>
+                            <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:bg-[#E14C4C] transition-all">Empezar ahora</button>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@ const LandingAssistant: React.FC = () => {
             <section className="bg-red-100 py-12">
                 <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-4 sm:px-6 lg:px-0">
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+150</p><p className="mt-2 text-base text-gray-800">Estudiantes</p></div>
-                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">$27</p><p className="mt-2 text-base text-gray-800">Ingreso Promedio por tarea</p></div>
+                    <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">$17</p><p className="mt-2 text-base text-gray-800">Ingreso Promedio por tarea</p></div>
                     <div><p className="text-5xl lg:text-6xl font-extrabold text-black font-days">+80%</p><p className="mt-2 text-base text-gray-800">De nuestros ingresos son para asistentes</p></div>
                 </div>
             </section>
@@ -295,7 +295,7 @@ const LandingAssistant: React.FC = () => {
                                 Únete a nuestra comunidad de asistentes académicos en Ecuador y convierte tu conocimiento en ingresos. El registro es rápido y sencillo.
                             </p>
                             <div className="mt-8">
-                                <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
+                                <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:bg-[#E14C4C] transition-all">
                                     Regístrate como asistente
                                 </button>
                            </div>
@@ -308,7 +308,7 @@ const LandingAssistant: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="intiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#FF5A5A]"><InstagramIcon /></a>
@@ -317,7 +317,7 @@ const LandingAssistant: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
+                        <p>© 2025 intiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

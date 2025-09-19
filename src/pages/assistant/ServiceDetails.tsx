@@ -91,7 +91,7 @@ const ServiceDetails = () => {
                 <button 
                   key={service.id} 
                   onClick={() => handleServiceClick(service.id)}
-                  className="w-full p-4 border-2 rounded-2xl flex items-center justify-between text-left transition-colors hover:border-cyan-400"
+                  className="w-full p-4 border-2 rounded-2xl flex items-center justify-between text-left transition-colors hover:border-[#FF5A5A]"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-gray-100 text-gray-600">

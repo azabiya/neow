@@ -51,21 +51,21 @@ const PriceRangeCard = ({ title, data, criterion, onDataChange, onAdd, onRemove 
                         placeholder={criterion === 'pages' ? 'Págs' : '%'}
                         value={item.min_value} 
                         onChange={(e) => onDataChange(criterion, index, 'min_value', e.target.value)}
-                        className="col-span-3 text-gray-800 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                        className="col-span-3 text-gray-800 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#FF5A5A]"
                     />
                     <input 
                         type="number" 
                         placeholder={criterion === 'pages' ? 'Págs' : '%'}
                         value={item.max_value} 
                         onChange={(e) => onDataChange(criterion, index, 'max_value', e.target.value)}
-                        className="col-span-3 text-gray-800 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                        className="col-span-3 text-gray-800 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#FF5A5A]"
                     />
                     <input 
                         type="text" 
                         placeholder="$0.00"
                         value={item.cost} 
                         onChange={(e) => onDataChange(criterion, index, 'cost', e.target.value)}
-                        className="col-span-3 font-medium text-gray-900 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                        className="col-span-3 font-medium text-gray-900 text-center bg-white rounded-md p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#FF5A5A]"
                     />
                     <button onClick={() => onRemove(criterion, index)} className="col-span-1 text-gray-500 hover:text-red-500 flex justify-center">
                         <Trash2 size={18} />

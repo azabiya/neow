@@ -249,7 +249,7 @@ const AssistantHome = () => {
                 <div 
                   key={item.id} 
                   onClick={() => navigate(`/task/${item.id}`)}
-                  className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm cursor-pointer hover:border-cyan-300 transition-colors"
+                  className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm cursor-pointer hover:border-[#FF5A5A] transition-colors"
                 >
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-semibold text-black">{item.title}</h4>
