@@ -14,10 +14,12 @@ export default {
       },
       colors: {
         'primary': '#FCAE06',
+        'primary-light': '#FFF9E6',
         'brand-dark': '#1A1A1A',
         'brand-gray': '#F2F2F2',
         'brand-gray-dark': '#A9A9A9',
         'brand-green': '#10B981',
+        'brand-red': '#E04A4A',
       },
     },
   },

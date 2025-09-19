@@ -171,7 +171,7 @@ const LandingStudent: React.FC = () => {
             <header className="w-full bg-white shadow-sm z-20">
                 <div className="flex justify-between items-center max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex items-center gap-4 md:gap-8">
-                        <img src={logo} alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
+                        <img src={logo} alt="intiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                         <nav className="hidden md:flex items-center">
                             <Link to="/assistants" className="text-black font-medium hover:text-[#FF5A5A] transition-colors">Asistente</Link>
                         </nav>
@@ -203,21 +203,21 @@ const LandingStudent: React.FC = () => {
                 </div>
             </section>
 
-            {/* Qué es IntiHelp? Section */}
+            {/* Qué es intiHelp? Section */}
             <section className="py-20 lg:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#FF5A5A]">IntiHelp?</span></h2>
-                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">IntiHelp es una plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Encargar tareas nunca fue tan fácil y seguro!</p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black">¿Qué es <span className="text-[#FF5A5A]">intiHelp?</span></h2>
+                    <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed">intiHelp es una plataforma hecha por y para estudiantes en Ecuador. Te conectamos con asistentes académicos verificados de las mejores universidades del país para ayudarte con tus tareas, proyectos y trabajos. ¡Encargar tareas nunca fue tan fácil y seguro!</p>
                     <div className="mt-10">
                         <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">Regístrate</button>
                     </div>
                 </div>
             </section>
 
-            {/* Por qué usar IntiHelp? Section */}
+            {/* Por qué usar intiHelp? Section */}
             <section className="py-20 lg:py-24 bg-white">
                 <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">IntiHelp?</span></h2></div>
+                    <div className="text-center mb-12 lg:mb-16"><h2 className="text-3xl md:text-4xl font-bold text-black">¿Por qué usar <span className="text-[#FF5A5A]">intiHelp?</span></h2></div>
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
                             <div className="flex flex-col items-center">
@@ -339,7 +339,7 @@ const LandingStudent: React.FC = () => {
                     <div className="bg-white border border-[#E0DDDD] rounded-2xl shadow-xl p-8 md:p-12 text-center">
                         <h2 className="text-3xl font-bold text-[#FF5A5A]">¿Listo para mejorar tus calificaciones?</h2>
                         <p className="mt-4 max-w-2xl mx-auto text-gray-600">
-                            Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con IntiHelp. El registro es gratis y toma menos de un minuto.
+                            Únete a cientos de estudiantes en Ecuador que ya están optimizando su tiempo y alcanzando el éxito académico con intiHelp. El registro es gratis y toma menos de un minuto.
                         </p>
                         <div className="mt-8">
                             <button onClick={() => navigate('/register')} className="px-8 py-3 text-base font-semibold bg-[#FF5A5A] text-white rounded-lg hover:brightness-90 transition-all">
@@ -355,7 +355,7 @@ const LandingStudent: React.FC = () => {
                 <div className="max-w-[1400px] mx-auto px-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                         <div>
-                            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
+                            <img src="/src/assets/logo.svg" alt="intiHelp" className="h-10" />
                         </div>
                         <div className="flex gap-4 md:gap-6 text-black">
                             <a href="#" className="hover:text-[#FF5A5A]"><InstagramIcon /></a>
@@ -364,7 +364,7 @@ const LandingStudent: React.FC = () => {
                         </div>
                     </div>
                     <div className="mt-8 text-center text-gray-500 text-sm">
-                        <p>© 2025 IntiHelp. Todos los derechos reservados.</p>
+                        <p>© 2025 intiHelp. Todos los derechos reservados.</p>
                     </div>
                 </div>
             </footer>

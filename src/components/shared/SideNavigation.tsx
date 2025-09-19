@@ -33,7 +33,7 @@ export const SideNavigation = ({ userRole }: { userRole: 'student' | 'assistant'
     return (
         <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 p-4">
             <div className="mb-10 px-2">
-                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10" />
+                <img src="/src/assets/logo.svg" alt="intiHelp" className="h-10" />
             </div>
 
             <nav className="flex flex-col gap-2">

@@ -101,7 +101,7 @@ const Home = () => {
     <div className="bg-white min-h-screen font-inter">
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src={logo} alt="IntiHelp" className="h-10 md:hidden" />
+        <img src={logo} alt="intiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div> {/* Spacer for desktop */}
         <Bell className="w-6 h-6 text-gray-400" />
       </header>
@@ -119,7 +119,7 @@ const Home = () => {
             type="text"
             placeholder="¿Qué tarea quieres realizar?"
             onChange={(e) => debouncedSetSearchTerm(e.target.value)}
-            className="w-full py-4 px-6 border-2 border-gray-300 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:border-cyan-400 font-inter text-base pr-16"
+            className="w-full py-4 px-6 border-2 border-gray-300 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:border-primary font-inter text-base pr-16"
           />
           <button className="absolute right-2 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center cursor-pointer">
             <span className="text-white text-2xl font-bold">→</span>
@@ -136,7 +136,7 @@ const Home = () => {
                 className="flex flex-col items-center text-center w-16 cursor-pointer"
                 onClick={() => handleTaskTypeClick(task)}
               >
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-2 transition-colors bg-gray-100 border border-gray-200 hover:border-cyan-300`}>
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-2 transition-colors bg-gray-100 border border-gray-200 hover:border-primary`}>
                   <IconComponent className={`w-8 h-8 text-gray-500`} />
                 </div>
                 <span className={`text-sm font-inter text-gray-500`}>
