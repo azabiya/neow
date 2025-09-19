@@ -203,7 +203,7 @@ const Step2: FC<Step2Props> = ({ onNext, onCareerSelect, selectedCareerId }) => 
             key={career.id}
             onClick={() => onCareerSelect(career)}
             className={`w-full text-center py-3 border rounded-full font-medium transition-colors ${
-              selectedCareerId === career.id ? 'bg-[#00B8DB] text-white border-[#00B8DB]' : 'border-gray-300 text-black hover:border-gray-400'
+              selectedCareerId === career.id ? 'bg-[#FF5A5A] text-white border-[#FF5A5A]' : 'border-gray-300 text-black hover:border-gray-400'
             }`}
           >
             {career.name}
@@ -400,7 +400,7 @@ const Step4: FC<Step4Props> = ({ onNext, taskDetails, onAssistantSelect, selecte
           <button
             key={assistant.id}
             onClick={() => onAssistantSelect(assistant)}
-            className={`w-full p-4 border-2 rounded-2xl text-left transition-colors ${selectedAssistantId === assistant.id ? 'border-[#00B8DB]' : 'border-gray-200'} shadow-sm`}
+            className={`w-full p-4 border-2 rounded-2xl text-left transition-colors ${selectedAssistantId === assistant.id ? 'border-[#FF5A5A]' : 'border-gray-200'} shadow-sm`}
           >
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
@@ -410,14 +410,14 @@ const Step4: FC<Step4Props> = ({ onNext, taskDetails, onAssistantSelect, selecte
                 <div>
                   <div className="flex items-center gap-1">
                     <p className="font-bold text-black">{assistant.full_name}</p>
-                    <CheckCircle2 size={16} className="text-blue-500" />
+                    <CheckCircle2 size={16} className="text-red-500" />
                   </div>
                   <p className="text-sm text-gray-500">Asistente</p>
                 </div>
               </div>
               <div className="text-right">
                 <div className="flex items-center gap-1">
-                  <Star size={16} className="text-blue-400" />
+                  <Star size={16} className="text-red-400" />
                   <p className="font-bold">{assistant.rating}</p>
                 </div>
                   <p className="font-bold text-green-500">${(assistant.price || 0).toFixed(2)}</p>
@@ -536,20 +536,20 @@ const Step5: FC<Step5Props> = ({ onFinalSubmit, taskDetails, onCouponCodeChange,
                 {taskDetails.selectedAssistant?.full_name?.charAt(0)}
               </div>
               <div>
-                <div className="flex items-center gap-1"><p className="font-bold">{taskDetails.selectedAssistant?.full_name}</p><CheckCircle2 size={16} className="text-blue-500" /></div>
+                <div className="flex items-center gap-1"><p className="font-bold">{taskDetails.selectedAssistant?.full_name}</p><CheckCircle2 size={16} className="text-red-500" /></div>
                 <p className="text-sm text-gray-500">Asistente</p>
               </div>
             </div>
-            <div className="flex items-center gap-1"><Star size={16} className="text-blue-400" /><p className="font-bold">{taskDetails.selectedAssistant?.rating}</p></div>
+            <div className="flex items-center gap-1"><Star size={16} className="text-red-400" /><p className="font-bold">{taskDetails.selectedAssistant?.rating}</p></div>
           </div>
         </div>
         {/* Payment Method */}
         <div className="border border-gray-200 rounded-xl p-4">
           <h3 className="font-semibold mb-4">Método de pago:</h3>
           <div className="space-y-3">
-            <div className="flex items-center gap-3"><input type="radio" name="payment" className="form-radio text-[#00B8DB] h-4 w-4" disabled/><FileText size={20} /><p className="text-gray-400">Tarjeta de Crédito / Débito</p></div>
+            <div className="flex items-center gap-3"><input type="radio" name="payment" className="form-radio text-[#FF5A5A] h-4 w-4" disabled/><FileText size={20} /><p className="text-gray-400">Tarjeta de Crédito / Débito</p></div>
             <div className="border-t border-gray-200 my-2"></div>
-            <div className="flex items-center gap-3"><input type="radio" name="payment" defaultChecked className="form-radio text-[#00B8DB] h-4 w-4"/><Repeat size={20} /><p>Transferencia Bancaria</p></div>
+            <div className="flex items-center gap-3"><input type="radio" name="payment" defaultChecked className="form-radio text-[#FF5A5A] h-4 w-4"/><Repeat size={20} /><p>Transferencia Bancaria</p></div>
           </div>
         </div>
         {/* Group Payment */}
@@ -558,14 +558,14 @@ const Step5: FC<Step5Props> = ({ onFinalSubmit, taskDetails, onCouponCodeChange,
                 <h3 className="font-semibold">Pago grupal:</h3>
                 <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" checked={isGroupPaymentEnabled} onChange={(e) => handleToggleGroupPayment(e.target.checked)} className="sr-only peer" />
-                    <div className="w-12 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00B8DB]"></div>
+                    <div className="w-12 h-6 bg-gray-200 rounded-full peer peer-focus:ring-2 peer-focus:ring-red-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#FF5A5A]"></div>
                 </label>
             </div>
             {isGroupPaymentEnabled && (
                 <>
                     <div className="flex justify-between items-center">
                         <h3 className="font-medium">Integrantes:</h3>
-                        <button onClick={() => navigator.clipboard.writeText(groupPaymentLink)} className="flex items-center gap-1 text-sm text-[#00B8DB] font-semibold"><Paperclip size={16} /> Copiar link</button>
+                        <button onClick={() => navigator.clipboard.writeText(groupPaymentLink)} className="flex items-center gap-1 text-sm text-[#FF5A5A] font-semibold"><Paperclip size={16} /> Copiar link</button>
                     </div>
                     <div className="space-y-2">
                         {members.map((member, index) => (
@@ -580,7 +580,7 @@ const Step5: FC<Step5Props> = ({ onFinalSubmit, taskDetails, onCouponCodeChange,
                         ))}
                         <div>
                           <input type="text" placeholder="Nombre:" value={newMemberName} onChange={(e) => setNewMemberName(e.target.value)} className="w-full p-2 border border-gray-300 rounded-md"/>
-                          <button onClick={handleAddMember} className="flex items-center gap-2 text-[#00B8DB] mt-2"><PlusCircle size={20} />Añadir integrante</button>
+                          <button onClick={handleAddMember} className="flex items-center gap-2 text-[#FF5A5A] mt-2"><PlusCircle size={20} />Añadir integrante</button>
                         </div>
                     </div>
                 </>
@@ -609,7 +609,7 @@ const Step5: FC<Step5Props> = ({ onFinalSubmit, taskDetails, onCouponCodeChange,
             <div className="flex justify-between font-bold text-base"><p>Total:</p><p>${finalTotal.toFixed(2)}</p></div>
         </div>
       </div>
-      <button onClick={onFinalSubmit} className="mt-8 w-full py-4 bg-[#00B8DB] text-white rounded-full font-semibold text-lg" disabled={isSubmitting}>
+      <button onClick={onFinalSubmit} className="mt-8 w-full py-4 bg-[#FF5A5A] text-white rounded-full font-semibold text-lg" disabled={isSubmitting}>
         {isSubmitting ? 'Solicitando...' : `Solicitar por $${finalTotal.toFixed(2)}`}
       </button>
     </>

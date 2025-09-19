@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Bell, FileText, BarChart3, Timer } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface TaskType {
   id: string;
@@ -100,7 +101,7 @@ const Home = () => {
     <div className="bg-white min-h-screen font-inter">
       {/* Header */}
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 md:hidden" />
+        <img src={logo} alt="IntiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div> {/* Spacer for desktop */}
         <Bell className="w-6 h-6 text-gray-400" />
       </header>

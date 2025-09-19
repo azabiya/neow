@@ -1,6 +1,7 @@
 // src/pages/Profile.tsx
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import { Bell, User, CreditCard, HelpCircle, LogOut, Star, CheckCircle2, Pencil, FilePenLine, ChevronRight } from 'lucide-react';
+import logo from '../../assets/logo.svg';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Profile = () => {
   return (
     <div className="max-w-md mx-auto min-h-screen bg-gray-50 font-inter text-black p-6 pb-24">
       <header className="text-center pt-8 pb-10">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+        <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
       </header>
 
       <main className="space-y-6">
@@ -42,7 +43,7 @@ const Profile = () => {
             <div>
               <div className="flex items-center gap-1.5">
                 <p className="font-semibold text-lg">Ana García</p>
-                <CheckCircle2 size={16} className="text-blue-500 fill-current" />
+                <CheckCircle2 size={16} className="text-red-500 fill-current" />
               </div>
               <p className="text-sm text-gray-500 capitalize">
                 {userRole === 'student' ? 'Estudiante' : 'Asistente'}
@@ -68,7 +69,7 @@ const Profile = () => {
           <div>
             <div className="flex justify-center items-center gap-1">
                 <p className="text-2xl font-semibold">4.8</p>
-                <Star size={20} className="text-blue-400 fill-blue-400" />
+                <Star size={20} className="text-red-400 fill-red-400" />
             </div>
             <p className="text-sm text-gray-500">Promedio</p>
           </div>

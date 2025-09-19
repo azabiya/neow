@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Bell, Star, CheckCircle2, Timer } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface ProfileData {
   id: string;
@@ -183,7 +184,7 @@ const AssistantHome = () => {
   return (
     <div className="bg-white min-h-screen font-inter">
       <header className="flex justify-between items-center px-6 md:px-10 pt-11 pb-6">
-        <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 md:hidden" />
+        <img src={logo} alt="IntiHelp" className="h-10 md:hidden" />
         <div className="hidden md:block flex-1"></div>
         <Bell className="w-6 h-6 text-gray-400" />
       </header>
@@ -198,7 +199,7 @@ const AssistantHome = () => {
           <div>
             <div className="flex items-center justify-center gap-1">
               <p className="text-2xl font-bold">{stats.avgRating.toFixed(1)}</p>
-              <Star size={20} className="text-blue-400 fill-yellow-400" />
+              <Star size={20} className="text-red-400 fill-yellow-400" />
             </div>
             <p className="text-xs text-gray-500 mt-1">Calif. promedio</p>
           </div>
@@ -213,7 +214,7 @@ const AssistantHome = () => {
         </div>
       
         <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="bg-[#00B8DB] text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
+          <div className="bg-[#FF5A5A] text-white rounded-2xl p-6 flex flex-col justify-center items-center text-center cursor-pointer">
             <p className="text-sm">Ingresos pendientes:</p>
             <p className="text-3xl font-bold mt-1">${stats.pendingIncome.toFixed(2)}</p>
           </div>
@@ -229,7 +230,7 @@ const AssistantHome = () => {
             </div>
             <div className="flex items-center gap-1">
               <p className="font-semibold text-sm">{profile?.full_name}</p>
-              <CheckCircle2 size={14} className="text-blue-500 fill-current" />
+              <CheckCircle2 size={14} className="text-red-500 fill-current" />
             </div>
             <button className="text-xs border border-gray-300 rounded-md px-4 py-1 mt-2 hover:bg-gray-50">
               Ver perfil

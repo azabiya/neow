@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { User, Link as LinkIcon } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface GroupMember {
   id: string;
@@ -72,7 +73,7 @@ const GroupPayment = () => {
     return (
         <div className="max-w-md mx-auto min-h-screen bg-white font-inter text-black p-6 flex flex-col">
             <header className="text-center pt-8 pb-10">
-                <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-10 mx-auto" />
+                <img src={logo} alt="IntiHelp" className="h-10 mx-auto" />
             </header>
 
             <main className="flex-grow">
@@ -82,7 +83,7 @@ const GroupPayment = () => {
                     <span className="text-sm font-semibold">Integrantes</span>
                     <button 
                         onClick={() => navigator.clipboard.writeText(window.location.href)}
-                        className="flex items-center gap-1.5 bg-[#00B8DB] text-white text-xs px-3 py-1.5 rounded-md"
+                        className="flex items-center gap-1.5 bg-[#FF5A5A] text-white text-xs px-3 py-1.5 rounded-md"
                     >
                         Link de pago <LinkIcon size={14} />
                     </button>
@@ -106,7 +107,7 @@ const GroupPayment = () => {
                 <div className="mt-12">
                     <button 
                         onClick={() => navigate(`/payment/transfer/group/${groupId}`)}
-                        className="w-full bg-[#00B8DB] text-white py-4 rounded-full font-medium"
+                        className="w-full bg-[#FF5A5A] text-white py-4 rounded-full font-medium"
                     >
                         Pagar mi cuota
                     </button>

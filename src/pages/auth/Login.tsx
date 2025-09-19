@@ -4,6 +4,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
+import logo from '../../assets/logo.svg';
 
 interface LoginProps {
   setUserRole: Dispatch<SetStateAction<'student' | 'assistant' | null>>;
@@ -64,7 +65,7 @@ const Login = ({ setUserRole }: LoginProps) => {
       <div className="flex-grow flex items-center justify-center p-6">
         <div className="w-full max-w-sm">
           <header className="text-center pt-12 pb-10">
-            <img src="/src/assets/logo.svg" alt="IntiHelp" className="h-12 mx-auto" />
+            <img src={logo} alt="IntiHelp" className="h-12 mx-auto" />
           </header>
 
           <main className="w-full flex flex-col gap-8">
@@ -83,7 +84,7 @@ const Login = ({ setUserRole }: LoginProps) => {
                   placeholder="Correo Electrónico"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#00B8DB]"
+                  className="mt-1 w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#FF5A5A]"
                   required
                 />
               </div>
@@ -96,7 +97,7 @@ const Login = ({ setUserRole }: LoginProps) => {
                     placeholder="Contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#00B8DB]"
+                    className="mt-1 w-full p-2 pr-10 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#FF5A5A]"
                     required
                   />
                   <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400">
@@ -104,7 +105,7 @@ const Login = ({ setUserRole }: LoginProps) => {
                   </button>
                 </div>
               </div>
-              <button type="submit" className="w-full bg-[#00B8DB] text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
+              <button type="submit" className="w-full bg-[#FF5A5A] text-white py-4 rounded-xl font-semibold text-lg mt-8 disabled:bg-gray-400" disabled={loading}>
                 {loading ? 'Iniciando...' : 'Iniciar sesión'}
               </button>
             </form>
@@ -112,7 +113,7 @@ const Login = ({ setUserRole }: LoginProps) => {
             <div className="text-center mt-4">
               <p className="text-gray-600">
                 ¿Aún no tienes cuenta?{' '}
-                <Link to="/register" className="font-semibold text-[#00B8DB]">
+                <Link to="/register" className="font-semibold text-[#FF5A5A]">
                   Regístrate
                 </Link>
               </p>
