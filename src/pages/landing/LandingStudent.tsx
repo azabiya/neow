@@ -1,6 +1,6 @@
 // src/pages/landing/LandingStudent.tsx
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import heroTexture from '/src/assets/hero-texture.png';
 import logo from '../../assets/logo.svg';
 
@@ -173,7 +173,7 @@ const LandingStudent: React.FC = () => {
                     <div className="flex items-center gap-4 md:gap-8">
                         <img src={logo} alt="IntiHelp" className="h-10 cursor-pointer" onClick={() => navigate('/')} />
                         <nav className="hidden md:flex items-center">
-                            <a href="/assistants" className="text-black font-medium hover:text-[#FF5A5A] transition-colors">Asistente</a>
+                            <Link to="/assistants" className="text-black font-medium hover:text-[#FF5A5A] transition-colors">Asistente</Link>
                         </nav>
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
